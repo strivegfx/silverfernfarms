@@ -445,7 +445,7 @@ $(document).ready(function(){
 
 				} // end of for loop
 
-				$wth = ($wth + 2) * 240; // find the new width of the ul by multiplying the li width (240px) be the ammount of li
+				$wth = ($wth + 2) * 235; // find the new width of the ul by multiplying the li width (235px) be the ammount of li
 
 				$m.s.ulWth = $wth; // store the ul width in the global settings to reference when animating the dynamic scroll with TweenMax
 
@@ -472,7 +472,7 @@ $(document).ready(function(){
 				$ul.css({'width' : $wth + 'px'}) // set the length of the ul to match the number of li taht it will house
 					.html($li); // add in the $li content generated from the for loop
 
-				TweenMax.to($chfCon.find('.scroll-container'), ($ani * 5), {'scrollLeft' : 240});
+				TweenMax.to($chfCon.find('.scroll-container'), ($ani * 5), {'scrollLeft' : 235});
 
 			}, // end of popChef fnc
 
@@ -713,7 +713,7 @@ $(document).ready(function(){
 						var $dir = $this.parent().attr('data-dir'),
 							$scrlCon  = $chfCon.find('.scroll-container'),
 							$curSeg = $scrlCon.attr('data-seg'),
-							$totSeg = ($m.s.ulWth / 240) - 4; // <----- minus 4 for the content on screen????
+							$totSeg = ($m.s.ulWth / 235) - 4; // <----- minus 4 for the content on screen????
 
 						if($dir === 'left'){
 
@@ -739,7 +739,7 @@ $(document).ready(function(){
 
 						console.log('$curSeg = ' + $curSeg);
 
-						TweenMax.to($scrlCon, ($ani * 5), {'scrollLeft' : ($curSeg * 240)});
+						TweenMax.to($scrlCon, ($ani * 5), {'scrollLeft' : ($curSeg * 235)});
 
 						$scrlCon.attr({'data-seg' : $curSeg});
 
@@ -758,7 +758,7 @@ $(document).ready(function(){
 
 							console.log('***LEFT***');
 
-							TweenMax.to($scrlCon, $ani, {'scrollLeft' : '-=240'});
+							TweenMax.to($scrlCon, $ani, {'scrollLeft' : '-=235'});
 
 						}else{
 
