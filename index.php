@@ -74,36 +74,7 @@
 
                 <div class="slider-container">
 
-                    <ul class="slider-controls">
-                        <li data-num="0"></li><!--
-                        --><li data-num="1"></li><!--
-                        --><li data-num="2"></li><!--
-                        --><li data-num="3"></li><!--
-                        --><li data-num="4"></li>
-                    </ul>
-
-                    <div class="overlay"></div>
-
-                    <ul class="slider-images">
-                        <li data-num="0">
-                            <div class="darken"></div>
-                        </li><!--
-                        --><li data-num="1">
-                            <div class="darken"></div>
-                        </li><!--
-                        --><li data-num="2">
-                            <div class="darken"></div>
-                        </li><!--
-                        --><li data-num="3">
-                            <div class="darken"></div>
-                        </li><!--
-                        --><li data-num="4">
-                            <div class="darken"></div>
-                        </li><!--
-                        --><li data-num="5"><!-- this is a duplicate of li[data-num="0"] used for a seamless TweenMax loop -->
-                            <div class="darken"></div>
-                        </li>
-                    </ul>
+                    <div class="slider-images"></div>
 
                     <div class="footer-shell"></div> <!-- set as DOM element and not pseudo element due to IE8 -->
 

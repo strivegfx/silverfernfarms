@@ -112,7 +112,7 @@ h4{
 	width: 940px;
 	margin: 0 auto 0 auto;
 
-	/*&:before, &:after{
+	&:before, &:after{
 		@include pseudo;
 		top: 0;
 		width: 160px;
@@ -129,12 +129,12 @@ h4{
 
 	&:after{
 		right: -160px;
-	}*/
+	}
 }
 
 .intro{
 	position: relative;
-	padding: 450px $padB $padB $padB;
+	padding: 450px $padB ($padB - 20px) $padB;
 	background: {
 		image: url(../img/generic-sprite.jpg);
 		repeat: no-repeat;
@@ -393,9 +393,9 @@ ul.call-to-action{
 	z-index: 1000;
 	display: none;
 	position: absolute;
-	width: 820px;
+	width: 840px;
 	min-height: 200+ ($padS * 2);
-	margin: $padB ($padB + $padS) 0 ($padB + $padS);
+	margin: $padB $padB 0 $padB;
 	//padding: $padB;
 	border: 1px solid lighten($lytGray, 10%);
 	background-color: white;
@@ -427,25 +427,89 @@ ul.call-to-action{
 }
 
 .data{
-	margin: 98px 0 0 280px;
+	margin: 98px 0 $padS 290px;
 	width: 520px;
-	padding: 0 0 $padS 0;
+	padding: 0 0 0 $padS;
+	border-left: 1px solid $medGray;
 
 	.image{
+		z-index: -1;
 		position: absolute;
-		top: $padS;
-		left: $padS;
-		width: 200px;
-		height: 200px;
-		border: 1px solid $medGray;
+		top: 0;
+		left: 0;
+		width: 290px;
+		height: 300px;
+		//border: 1px solid $medGray;
 		background: {
 			image: url(../img/sketch-sprite-large.jpg);
 			repeat: no-repeat;
 		}
-		@include border-radius(50%);
-		behavior: url(css3pie/PIE.htc);
+		//@include border-radius(50%);
+		//behavior: url(css3pie/PIE.htc);
 
 		&:before{
+			@include pseudo;
+			width: 190px;
+			height: 30px;
+			left: 50px;
+			bottom: 70px;
+			background: {
+				image: url(../img/transparent-sprite.png);
+				repeat: no-repeat;
+				position: -630px 0;
+				//color: red;
+			}
+		}
+
+		&[data-sprite="cervena-venison"]{
+			background-position: (0 * 290px) center;
+
+			&:before{
+				bottom: 50px;
+			}
+		}
+
+		&[data-sprite="silere"]{
+			background-position: (-1 * 290px) center;
+
+			&:before{
+				bottom: 50px;
+			}
+		}
+
+		&[data-sprite="angus"]{
+			background-position: (-2 * 290px) center;
+
+			&:before{
+				bottom: 60px;
+			}
+		}
+
+		&[data-sprite="hereford"]{
+			background-position: (-3 * 290px) center;
+
+			&:before{
+				bottom: 60px;
+			}
+		}
+
+		&[data-sprite="reserve"]{
+			background-position: (-4 * 290px) center;
+		}
+
+		&[data-sprite="sff-beef"]{
+			background-position: (-5 * 290px) center;
+		}
+
+		&[data-sprite="sff-venison"]{
+			background-position: (-6 * 290px) center;
+		}
+
+		&[data-sprite="sff-lamb"]{
+			background-position: (-7 * 290px) center;
+		}
+
+		/*&:before{
 			@include pseudo;
 			top: 50%;
 			left: 100%;
@@ -464,7 +528,7 @@ ul.call-to-action{
 			border: 1px solid $medGray;
 			@include border-radius(50%);
 			// behavior: url(css3pie/PIE.htc); // canot
-		}
+		}*/
 	}
 
 	h3{
@@ -521,11 +585,14 @@ ul.call-to-action{
 // ----------------------------------------
 
 .slider-container{
-	$wth: 920px;
+	$wth: 900px;
 
 	position: absolute;
+	overflow: hidden;
 	top: 0;
 	left: 0;
+	width: $wth;
+	height: 420px;
 	margin: 0 $padS 0 $padS;
 
 	.footer-shell{
@@ -548,7 +615,8 @@ ul.call-to-action{
 		width: $wth;
 		height: 20px;
 		left: 0;
-		bottom: 100%;
+		top: 0;
+		//bottom: 100%;
 		background: {
 			image: url(../img/generic-sprite.jpg);
 			position: 0 -735px;
@@ -556,7 +624,7 @@ ul.call-to-action{
 		}
 	}
 
-	.overlay{
+	/*.overlay{
 		z-index: 100;
 		position: absolute;
 		background-color: white;
@@ -565,22 +633,27 @@ ul.call-to-action{
 		left: 0;
 		top: 0;
 		@include opacity(0.75);
-	}
+	}*/
 }
 
-ul.slider-images{
-	$wth: 920px;
+.slider-images{
+	$wth: 900px;
 
 	position: relative;
-	overflow: hidden;
-	width: $wth;
+	//overflow: hidden;
+	width: $wth * 5;
 	height: 400px;
 	background-color: gray;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	background: {
+		image: url(../img/slider-img-sprite.jpg);
+		repeat: no-repeat;
+		position: 0 0;
+	}
 
-	li{
+	/*li{
 		position: absolute;
 		display: inline-block;
 		background: {
@@ -629,11 +702,11 @@ ul.slider-images{
 		height: 100%;
 		background-color: black;
 		@include opacity(0);
-	}
+	}*/
 }
 
-.slider-controls{
-	//display: none;
+/*.slider-controls{
+	display: none;
 	z-index: 500;
 	position: absolute;
 	width: 110px;
@@ -650,7 +723,7 @@ ul.slider-images{
 	@include box-shadow(0 0 20px 0 rgba(0, 0, 0, 0.15));
 	behavior: url(css3pie/PIE.htc);
 
-	/*.selector-overlay{
+	.selector-overlay{
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -667,7 +740,7 @@ ul.slider-images{
 		width: 20px;
 		height: 100%;
 		background-color: black;
-	}*/
+	}
 
 	li{
 		display: inline-block;
@@ -683,7 +756,7 @@ ul.slider-images{
 			background-color: black;
 		}
 	}
-}
+}*/
 
 // ----------------------------------------
 
@@ -697,7 +770,7 @@ ul.slider-images{
 	height: $hgt;
 
 	.scroll-container{
-		overflow-x: hidden;
+		overflow-x: scroll;
 		overflow-y: hidden;
 	}
 
@@ -729,6 +802,38 @@ ul.slider-images{
 			@include background-image(linear-gradient(bottom, white, rgba(white, 0)));
 		}
 
+		&[data-sprite="cervena-venison"] .image{
+			background-position: (0 * 195px) center;
+		}
+
+		&[data-sprite="silere"] .image{
+			background-position: (-1 * 195px) center;
+		}
+
+		&[data-sprite="angus"] .image{
+			background-position: (-2 * 195px) center;
+		}
+
+		&[data-sprite="hereford"] .image{
+			background-position: (-3 * 195px) center;
+		}
+
+		&[data-sprite="reserve"] .image{
+			background-position: (-4 * 195px) center;
+		}
+
+		&[data-sprite="sff-beef"] .image{
+			background-position: (-5 * 195px) center;
+		}
+
+		&[data-sprite="sff-venison"] .image{
+			background-position: (-6 * 195px) center;
+		}
+
+		&[data-sprite="sff-lamb"] .image{
+			background-position: (-7 * 195px) center;
+		}
+
 		/*img{
 			position: relative;
 			width: 100px;
@@ -738,7 +843,7 @@ ul.slider-images{
 			@include box-shadow(0 5px 15px 0 rgba(0, 0, 0, 0.5));
 		}*/
 
-		.image{
+		/*.image{
 			position: relative;
 			left: 50px;
 			width: 100px;
@@ -751,6 +856,34 @@ ul.slider-images{
 			@include border-radius(50%);
 			@include box-shadow(0 5px 15px 0 rgba(0, 0, 0, 0.5));
 			behavior: url(css3pie/PIE.htc);
+		}*/
+
+		.image{
+			position: relative;
+			//left: 50px;
+			width: 100%;
+			height: 100px;
+			background: {
+				image: url(../img/sketch-sprite-small.jpg);
+				repeat: no-repeat;
+			}
+		}
+
+		.shadow{
+			z-index: 1;
+			position: absolute;
+			top: 105px;
+			left: 50%;
+			margin: 0 0 0 -70px;
+			width: 140px;
+			height: 30px;
+			background: {
+				image: url(../img/transparent-sprite.png);
+				repeat: no-repeat;
+				position: -820px 0;
+				//color: red;
+			}
+			@include opacity(0.5);
 		}
 
 		h3{
@@ -924,6 +1057,17 @@ footer{
 	.slider-controls{
 		//display: none; // hides the slider for IE8 as TweenMax does not tween the current bullet into the right position during the timeline animation
 	}
+
+	.chef-container{
+
+		li{
+
+			.shadow{
+				display: none;
+			}
+
+		}
+	}
 }
 
 // ----------------------------------------
@@ -953,18 +1097,12 @@ footer{
 			}
 		}
 
-		&[data-dir="left"]{
-
-			.gradient{
-				background-position: 0 0 !important;
-			}
+		&[data-dir="left"] .gradient{
+			background-position: 0 0 !important;
 		}
 
-		&[data-dir="right"]{
-
-			.gradient{
-				position: -50px 0 !important;
-			}
+		&[data-dir="right"] .gradient{
+			background-position: -50px 0 !important;
 		}
 	}
 }

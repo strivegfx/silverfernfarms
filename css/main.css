@@ -54,30 +54,28 @@ h4 {
 .sff-wrapper {
   position: relative;
   width: 940px;
-  margin: 0 auto 0 auto;
-  	/*&:before, &:after{
-  		@include pseudo;
-  		top: 0;
-  		width: 160px;
-  		height: 100%;
-  		background: {
-  			image: url(../img/gutter-texture.jpg);
-  			repeat: repeat-y;
-  		}
-  	}
-  
-  	&:before{
-  		left: -160px;
-  	}
-  
-  	&:after{
-  		right: -160px;
-  	}*/ }
+  margin: 0 auto 0 auto; }
+  /* line 115, ../sass/main.scss */
+  .sff-wrapper:before, .sff-wrapper:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    width: 160px;
+    height: 100%;
+    background-image: url(../img/gutter-texture.jpg);
+    background-repeat: repeat-y; }
+  /* line 126, ../sass/main.scss */
+  .sff-wrapper:before {
+    left: -160px; }
+  /* line 130, ../sass/main.scss */
+  .sff-wrapper:after {
+    right: -160px; }
 
 /* line 135, ../sass/main.scss */
 .intro {
   position: relative;
-  padding: 450px 50px 50px 50px;
+  padding: 450px 50px 30px 50px;
   background-image: url(../img/generic-sprite.jpg);
   background-repeat: no-repeat;
   background-position: 0 -765px; }
@@ -294,9 +292,9 @@ ul.call-to-action {
   z-index: 1000;
   display: none;
   position: absolute;
-  width: 820px;
+  width: 840px;
   min-height: 240px;
-  margin: 50px 70px 0 70px;
+  margin: 50px 50px 0 50px;
   border: 1px solid #e6e6e6;
   background-color: white;
   -webkit-border-radius: 20px;
@@ -332,65 +330,102 @@ ul.call-to-action {
 
 /* line 429, ../sass/main.scss */
 .data {
-  margin: 98px 0 0 280px;
+  margin: 98px 0 20px 290px;
   width: 520px;
-  padding: 0 0 20px 0; }
-  /* line 434, ../sass/main.scss */
+  padding: 0 0 0 20px;
+  border-left: 1px solid #4d4d4d; }
+  /* line 435, ../sass/main.scss */
   .data .image {
+    z-index: -1;
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 200px;
-    height: 200px;
-    border: 1px solid #4d4d4d;
+    top: 0;
+    left: 0;
+    width: 290px;
+    height: 300px;
     background-image: url(../img/sketch-sprite-large.jpg);
     background-repeat: no-repeat;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-    behavior: url(css3pie/PIE.htc); }
-    /* line 448, ../sass/main.scss */
+    		/*&:before{
+    			@include pseudo;
+    			top: 50%;
+    			left: 100%;
+    			width: $padS;
+    			height: 1px;
+    			background-color: $medGray;			
+    		}
+    
+    		&:after{
+    			@include pseudo;
+    			top: 50%;
+    			left: 100%;
+    			margin: -10px 0 0 $padS;
+    			width: $padS;
+    			height: $padS;
+    			border: 1px solid $medGray;
+    			@include border-radius(50%);
+    			// behavior: url(css3pie/PIE.htc); // canot
+    		}*/ }
+    /* line 450, ../sass/main.scss */
     .data .image:before {
       position: absolute;
       display: block;
       content: "";
-      top: 50%;
-      left: 100%;
-      width: 20px;
-      height: 1px;
-      background-color: #4d4d4d; }
-    /* line 457, ../sass/main.scss */
-    .data .image:after {
-      position: absolute;
-      display: block;
-      content: "";
-      top: 50%;
-      left: 100%;
-      margin: -10px 0 0 20px;
-      width: 20px;
-      height: 20px;
-      border: 1px solid #4d4d4d;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
-      border-radius: 50%; }
-  /* line 470, ../sass/main.scss */
+      width: 190px;
+      height: 30px;
+      left: 50px;
+      bottom: 70px;
+      background-image: url(../img/transparent-sprite.png);
+      background-repeat: no-repeat;
+      background-position: -630px 0; }
+    /* line 464, ../sass/main.scss */
+    .data .image[data-sprite="cervena-venison"] {
+      background-position: 0px center; }
+      /* line 467, ../sass/main.scss */
+      .data .image[data-sprite="cervena-venison"]:before {
+        bottom: 50px; }
+    /* line 472, ../sass/main.scss */
+    .data .image[data-sprite="silere"] {
+      background-position: -290px center; }
+      /* line 475, ../sass/main.scss */
+      .data .image[data-sprite="silere"]:before {
+        bottom: 50px; }
+    /* line 480, ../sass/main.scss */
+    .data .image[data-sprite="angus"] {
+      background-position: -580px center; }
+      /* line 483, ../sass/main.scss */
+      .data .image[data-sprite="angus"]:before {
+        bottom: 60px; }
+    /* line 488, ../sass/main.scss */
+    .data .image[data-sprite="hereford"] {
+      background-position: -870px center; }
+      /* line 491, ../sass/main.scss */
+      .data .image[data-sprite="hereford"]:before {
+        bottom: 60px; }
+    /* line 496, ../sass/main.scss */
+    .data .image[data-sprite="reserve"] {
+      background-position: -1160px center; }
+    /* line 500, ../sass/main.scss */
+    .data .image[data-sprite="sff-beef"] {
+      background-position: -1450px center; }
+    /* line 504, ../sass/main.scss */
+    .data .image[data-sprite="sff-venison"] {
+      background-position: -1740px center; }
+    /* line 508, ../sass/main.scss */
+    .data .image[data-sprite="sff-lamb"] {
+      background-position: -2030px center; }
+  /* line 534, ../sass/main.scss */
   .data h3 {
     color: #9b7e54; }
-  /* line 474, ../sass/main.scss */
+  /* line 538, ../sass/main.scss */
   .data h3 {
     padding: 20px 0 10px 0; }
-  /* line 478, ../sass/main.scss */
+  /* line 542, ../sass/main.scss */
   .data .course {
     color: #cccccc; }
-  /* line 482, ../sass/main.scss */
+  /* line 546, ../sass/main.scss */
   .data .bullet {
     position: relative;
     padding: 0 0 0 20px; }
-    /* line 486, ../sass/main.scss */
+    /* line 550, ../sass/main.scss */
     .data .bullet:before {
       position: absolute;
       display: block;
@@ -405,30 +440,43 @@ ul.call-to-action {
       -ms-border-radius: 50%;
       -o-border-radius: 50%;
       border-radius: 50%; }
-  /* line 497, ../sass/main.scss */
+  /* line 561, ../sass/main.scss */
   .data ul {
     list-style-type: none;
     margin: 0;
     padding: 0; }
-    /* line 502, ../sass/main.scss */
+    /* line 566, ../sass/main.scss */
     .data ul .name {
       padding: 0 0 10px 20px;
       font-weight: 900;
       font-size: 16px; }
-    /* line 511, ../sass/main.scss */
+    /* line 575, ../sass/main.scss */
     .data ul .break {
       padding: 0 0 10px 0; }
-    /* line 515, ../sass/main.scss */
+    /* line 579, ../sass/main.scss */
     .data ul .extra-address {
       padding: 0 0 10px 20px; }
 
-/* line 523, ../sass/main.scss */
+/* line 587, ../sass/main.scss */
 .slider-container {
   position: absolute;
+  overflow: hidden;
   top: 0;
   left: 0;
-  margin: 0 20px 0 20px; }
-  /* line 531, ../sass/main.scss */
+  width: 900px;
+  height: 420px;
+  margin: 0 20px 0 20px;
+  /*.overlay{
+  	z-index: 100;
+  	position: absolute;
+  	background-color: white;
+  	width: $wth;
+  	height: 400px;
+  	left: 0;
+  	top: 0;
+  	@include opacity(0.75);
+  }*/ }
+  /* line 598, ../sass/main.scss */
   .slider-container .footer-shell {
     z-index: 150;
     position: absolute;
@@ -439,154 +487,146 @@ ul.call-to-action {
     background-image: url(../img/transparent-sprite.png);
     background-position: 0 -70px;
     background-repeat: no-repeat; }
-  /* line 545, ../sass/main.scss */
+  /* line 612, ../sass/main.scss */
   .slider-container:before {
     z-index: 150;
     position: absolute;
     display: block;
     content: "";
-    width: 920px;
+    width: 900px;
     height: 20px;
     left: 0;
-    bottom: 100%;
+    top: 0;
     background-image: url(../img/generic-sprite.jpg);
     background-position: 0 -735px;
     background-repeat: no-repeat; }
-  /* line 559, ../sass/main.scss */
-  .slider-container .overlay {
-    z-index: 100;
-    position: absolute;
-    background-color: white;
-    width: 920px;
-    height: 400px;
-    left: 0;
-    top: 0;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
-    opacity: 0.75; }
 
-/* line 571, ../sass/main.scss */
-ul.slider-images {
+/* line 639, ../sass/main.scss */
+.slider-images {
   position: relative;
-  overflow: hidden;
-  width: 920px;
+  width: 4500px;
   height: 400px;
   background-color: gray;
   list-style-type: none;
   padding: 0;
-  margin: 0; }
-  /* line 583, ../sass/main.scss */
-  ul.slider-images li {
-    position: absolute;
-    display: inline-block;
-    background-image: url(../img/slider-img-sprite.jpg);
-    background-repeat: no-repeat;
-    width: 920px;
-    height: 400px; }
-    /* line 593, ../sass/main.scss */
-    ul.slider-images li[data-num="0"] {
-      background-position: 0 0;
-      left: 0; }
-    /* line 598, ../sass/main.scss */
-    ul.slider-images li[data-num="1"] {
-      background-position: -920px 0;
-      left: 920px; }
-    /* line 603, ../sass/main.scss */
-    ul.slider-images li[data-num="2"] {
-      background-position: -1840px 0;
-      left: 920px; }
-    /* line 608, ../sass/main.scss */
-    ul.slider-images li[data-num="3"] {
-      background-position: -2760px 0;
-      left: 920px; }
-    /* line 613, ../sass/main.scss */
-    ul.slider-images li[data-num="4"] {
-      background-position: -3680px 0;
-      left: 920px; }
-    /* line 618, ../sass/main.scss */
-    ul.slider-images li[data-num="5"] {
-      background-position: 0 0;
-      left: 920px; }
-  /* line 624, ../sass/main.scss */
-  ul.slider-images .darken {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0; }
-
-/* line 635, ../sass/main.scss */
-.slider-controls {
-  z-index: 500;
-  position: absolute;
-  width: 110px;
-  height: 30px;
-  background-color: white;
-  border: 1px solid #e6e6e6;
-  list-style-type: none;
-  padding: 5px;
-  margin: 0 0 0 50%;
-  left: -60px;
-  bottom: 30px;
-  overflow: hidden;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
-  behavior: url(css3pie/PIE.htc);
-  	/*.selector-overlay{
+  margin: 0;
+  background-image: url(../img/slider-img-sprite.jpg);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  	/*li{
   		position: absolute;
-  		width: 100%;
-  		height: 100%;
+  		display: inline-block;
   		background: {
-  			image: url(../img/transparent-sprite.png);
+  			image: url(../img/slider-img-sprite.jpg);
   			repeat: no-repeat;
-  			position: 0 -305px;
+  		}
+  		width: $wth;
+  		height: 400px;
+  
+  		&[data-num="0"]{
+  			background-position: 0 0;
+  			left: 0;
+  		}
+  
+  		&[data-num="1"]{
+  			background-position: $wth * -1 0;
+  			left: $wth;
+  		}
+  
+  		&[data-num="2"]{
+  			background-position: $wth * -2 0;
+  			left: $wth;
+  		}
+  
+  		&[data-num="3"]{
+  			background-position: $wth * -3 0;
+  			left: $wth;
+  		}
+  
+  		&[data-num="4"]{
+  			background-position: $wth * -4 0;
+  			left: $wth;
+  		}
+  
+  		&[data-num="5"]{
+  			background-position: 0 0; // this is a duplicate of li[data-num="0"] used for a seamless TweenMax loop
+  			left: $wth;
   		}
   	}
   
-  	.selector-bullet{
+  	.darken{
   		position: absolute;
-  		left: 5px;
-  		width: 20px;
+  		top: 0;
+  		left: 0;
+  		width: 100%;
   		height: 100%;
   		background-color: black;
+  		@include opacity(0);
   	}*/ }
-  /* line 672, ../sass/main.scss */
-  .slider-controls li {
-    display: inline-block;
-    cursor: pointer;
-    width: 9px;
-    height: 9px;
-    border: 1px solid #cccccc;
-    margin: 5px;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-    behavior: url(css3pie/PIE.htc); }
-    /* line 682, ../sass/main.scss */
-    .slider-controls li[data-num="0"] {
-      background-color: black; }
 
-/* line 690, ../sass/main.scss */
+/*.slider-controls{
+	display: none;
+	z-index: 500;
+	position: absolute;
+	width: 110px;
+	height: 30px;
+	background-color: white;
+	border: 1px solid lighten($lytGray, 10%);
+	list-style-type: none;
+	padding: 5px;
+	margin: 0 0 0 50%;
+	left: -60px;
+	bottom: 30px;
+	overflow: hidden;
+	@include border-radius(5px);
+	@include box-shadow(0 0 20px 0 rgba(0, 0, 0, 0.15));
+	behavior: url(css3pie/PIE.htc);
+
+	.selector-overlay{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: {
+			image: url(../img/transparent-sprite.png);
+			repeat: no-repeat;
+			position: 0 -305px;
+		}
+	}
+
+	.selector-bullet{
+		position: absolute;
+		left: 5px;
+		width: 20px;
+		height: 100%;
+		background-color: black;
+	}
+
+	li{
+		display: inline-block;
+		cursor: pointer;
+		width: 9px;
+		height: 9px;
+		border: 1px solid $lytGray;
+		margin: 5px;
+		@include border-radius(50%);
+		behavior: url(css3pie/PIE.htc);
+
+		&[data-num="0"]{
+			background-color: black;
+		}
+	}
+}*/
+/* line 763, ../sass/main.scss */
 .chef-container {
   z-index: 300;
   position: relative;
   width: 940px;
   height: 300px; }
-  /* line 699, ../sass/main.scss */
+  /* line 772, ../sass/main.scss */
   .chef-container .scroll-container {
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: hidden; }
-  /* line 704, ../sass/main.scss */
+  /* line 777, ../sass/main.scss */
   .chef-container ul {
     position: relative;
     list-style-type: none;
@@ -594,7 +634,7 @@ ul.slider-images {
     padding: 0 235px 0 235px;
     height: 300px;
     overflow: hidden; }
-  /* line 713, ../sass/main.scss */
+  /* line 786, ../sass/main.scss */
   .chef-container li {
     position: relative;
     cursor: pointer;
@@ -611,8 +651,22 @@ ul.slider-images {
     	border: 2px solid white;
     	@include border-radius(50%);
     	@include box-shadow(0 5px 15px 0 rgba(0, 0, 0, 0.5));
+    }*/
+    /*.image{
+    	position: relative;
+    	left: 50px;
+    	width: 100px;
+    	height: 100px;
+    	border: 2px solid white;
+    	background: {
+    		image: url(../img/sketch-sprite-small.jpg);
+    		repeat: no-repeat;
+    	}
+    	@include border-radius(50%);
+    	@include box-shadow(0 5px 15px 0 rgba(0, 0, 0, 0.5));
+    	behavior: url(css3pie/PIE.htc);
     }*/ }
-    /* line 724, ../sass/main.scss */
+    /* line 797, ../sass/main.scss */
     .chef-container li .gradient {
       position: absolute;
       bottom: 0;
@@ -623,77 +677,104 @@ ul.slider-images {
       background-image: -moz-linear-gradient(bottom, #ffffff, rgba(255, 255, 255, 0));
       background-image: -o-linear-gradient(bottom, #ffffff, rgba(255, 255, 255, 0));
       background-image: linear-gradient(bottom, #ffffff, rgba(255, 255, 255, 0)); }
-    /* line 741, ../sass/main.scss */
+    /* line 805, ../sass/main.scss */
+    .chef-container li[data-sprite="cervena-venison"] .image {
+      background-position: 0px center; }
+    /* line 809, ../sass/main.scss */
+    .chef-container li[data-sprite="silere"] .image {
+      background-position: -195px center; }
+    /* line 813, ../sass/main.scss */
+    .chef-container li[data-sprite="angus"] .image {
+      background-position: -390px center; }
+    /* line 817, ../sass/main.scss */
+    .chef-container li[data-sprite="hereford"] .image {
+      background-position: -585px center; }
+    /* line 821, ../sass/main.scss */
+    .chef-container li[data-sprite="reserve"] .image {
+      background-position: -780px center; }
+    /* line 825, ../sass/main.scss */
+    .chef-container li[data-sprite="sff-beef"] .image {
+      background-position: -975px center; }
+    /* line 829, ../sass/main.scss */
+    .chef-container li[data-sprite="sff-venison"] .image {
+      background-position: -1170px center; }
+    /* line 833, ../sass/main.scss */
+    .chef-container li[data-sprite="sff-lamb"] .image {
+      background-position: -1365px center; }
+    /* line 861, ../sass/main.scss */
     .chef-container li .image {
       position: relative;
-      left: 50px;
-      width: 100px;
+      width: 100%;
       height: 100px;
-      border: 2px solid white;
       background-image: url(../img/sketch-sprite-small.jpg);
+      background-repeat: no-repeat; }
+    /* line 872, ../sass/main.scss */
+    .chef-container li .shadow {
+      z-index: 1;
+      position: absolute;
+      top: 105px;
+      left: 50%;
+      margin: 0 0 0 -70px;
+      width: 140px;
+      height: 30px;
+      background-image: url(../img/transparent-sprite.png);
       background-repeat: no-repeat;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
-      border-radius: 50%;
-      -webkit-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
-      -moz-box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
-      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
-      behavior: url(css3pie/PIE.htc); }
-    /* line 756, ../sass/main.scss */
+      background-position: -820px 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+      opacity: 0.5; }
+    /* line 889, ../sass/main.scss */
     .chef-container li h3 {
       padding: 10px 0 20px 0; }
-    /* line 760, ../sass/main.scss */
+    /* line 893, ../sass/main.scss */
     .chef-container li h4 {
       padding: 0 0 20px 0; }
 
-/* line 766, ../sass/main.scss */
+/* line 899, ../sass/main.scss */
 .scroll {
   z-index: 50;
   position: absolute;
   width: 50px;
   height: 100%; }
-  /* line 773, ../sass/main.scss */
+  /* line 906, ../sass/main.scss */
   .scroll .gradient {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%; }
-  /* line 781, ../sass/main.scss */
+  /* line 914, ../sass/main.scss */
   .scroll .rnd-btn {
     position: absolute;
     top: 50%;
     margin: -25px 0 0 0; }
-  /* line 787, ../sass/main.scss */
+  /* line 920, ../sass/main.scss */
   .scroll[data-dir="left"] {
     left: 0; }
-    /* line 790, ../sass/main.scss */
+    /* line 923, ../sass/main.scss */
     .scroll[data-dir="left"] .gradient {
       background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #ffffff), color-stop(100%, rgba(255, 255, 255, 0)));
       background-image: -webkit-linear-gradient(left, #ffffff, rgba(255, 255, 255, 0));
       background-image: -moz-linear-gradient(left, #ffffff, rgba(255, 255, 255, 0));
       background-image: -o-linear-gradient(left, #ffffff, rgba(255, 255, 255, 0));
       background-image: linear-gradient(left, #ffffff, rgba(255, 255, 255, 0)); }
-    /* line 794, ../sass/main.scss */
+    /* line 927, ../sass/main.scss */
     .scroll[data-dir="left"] .rnd-btn {
       left: 10px;
       background-position: 0 -125px;
       -webkit-box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.35);
       -moz-box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.35);
       box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.35); }
-  /* line 801, ../sass/main.scss */
+  /* line 934, ../sass/main.scss */
   .scroll[data-dir="right"] {
     right: 0; }
-    /* line 804, ../sass/main.scss */
+    /* line 937, ../sass/main.scss */
     .scroll[data-dir="right"] .gradient {
       background-image: -webkit-gradient(linear, 100% 50%, 0% 50%, color-stop(0%, #ffffff), color-stop(100%, rgba(255, 255, 255, 0)));
       background-image: -webkit-linear-gradient(right, #ffffff, rgba(255, 255, 255, 0));
       background-image: -moz-linear-gradient(right, #ffffff, rgba(255, 255, 255, 0));
       background-image: -o-linear-gradient(right, #ffffff, rgba(255, 255, 255, 0));
       background-image: linear-gradient(right, #ffffff, rgba(255, 255, 255, 0)); }
-    /* line 808, ../sass/main.scss */
+    /* line 941, ../sass/main.scss */
     .scroll[data-dir="right"] .rnd-btn {
       right: 10px;
       background-position: -50px -125px;
@@ -701,7 +782,7 @@ ul.slider-images {
       -moz-box-shadow: -7px 7px 15px 0 rgba(0, 0, 0, 0.35);
       box-shadow: -7px 7px 15px 0 rgba(0, 0, 0, 0.35); }
 
-/* line 818, ../sass/main.scss */
+/* line 951, ../sass/main.scss */
 footer {
   position: relative;
   margin: 50px 0 0 0;
@@ -710,7 +791,7 @@ footer {
   background-image: url(../img/transparent-sprite.png);
   background-repeat: no-repeat;
   background-position: 0 -215px; }
-  /* line 829, ../sass/main.scss */
+  /* line 962, ../sass/main.scss */
   footer ul {
     position: relative;
     list-style-type: none;
@@ -718,61 +799,64 @@ footer {
     padding: 0;
     border-top: 1px solid #1b1b1b;
     font-size: 14px; }
-    /* line 837, ../sass/main.scss */
+    /* line 970, ../sass/main.scss */
     footer ul li {
       top: 0;
       width: 50%;
       float: left; }
-      /* line 843, ../sass/main.scss */
+      /* line 976, ../sass/main.scss */
       footer ul li.left {
         padding: 20px 20px 0 0;
         text-align: right; }
-        /* line 847, ../sass/main.scss */
+        /* line 980, ../sass/main.scss */
         footer ul li.left a {
           text-decoration: none;
           color: #1b1b1b; }
-      /* line 853, ../sass/main.scss */
+      /* line 986, ../sass/main.scss */
       footer ul li.right {
         padding: 20px 0 0 20px;
         text-align: left; }
 
-/* line 870, ../sass/main.scss */
+/* line 1003, ../sass/main.scss */
 .no-borderradius .region-list li:before {
   background-image: url(../img/generic-sprite.jpg);
   background-position: -25px -590px;
   background-repeat: no-repeat;
   border: none !important; }
-/* line 885, ../sass/main.scss */
+/* line 1018, ../sass/main.scss */
 .no-borderradius .data .image:after {
   background-image: url(../img/generic-sprite.jpg);
   background-position: 0 -590px;
   background-repeat: no-repeat;
   border: none !important; }
-/* line 897, ../sass/main.scss */
+/* line 1030, ../sass/main.scss */
 .no-borderradius .data .bullet:before {
   background-image: url(../img/generic-sprite.jpg);
   background-position: -25px -590px;
   background-repeat: no-repeat;
   border: none !important; }
 
-/* line 915, ../sass/main.scss */
+/* line 1048, ../sass/main.scss */
 .lt-ie9 .slider-container:after {
   z-index: 100000;
   background-image: url(../img/ie8-slider-footer.png) !important;
   background-position: 0 0 !important; }
+/* line 1065, ../sass/main.scss */
+.lt-ie9 .chef-container li .shadow {
+  display: none; }
 
-/* line 937, ../sass/main.scss */
+/* line 1081, ../sass/main.scss */
 .no-cssgradients .chef-container li .gradient {
   background-image: url(../img/gradient-sprite.png) !important;
   background-position: -100px 0 !important;
   background-repeat: no-repeat; }
-/* line 949, ../sass/main.scss */
+/* line 1093, ../sass/main.scss */
 .no-cssgradients .scroll .gradient {
   background-image: url(../img/gradient-sprite.png) !important;
   background-repeat: no-repeat !important; }
-/* line 958, ../sass/main.scss */
+/* line 1100, ../sass/main.scss */
 .no-cssgradients .scroll[data-dir="left"] .gradient {
   background-position: 0 0 !important; }
-/* line 965, ../sass/main.scss */
+/* line 1104, ../sass/main.scss */
 .no-cssgradients .scroll[data-dir="right"] .gradient {
-  position: -50px 0 !important; }
+  background-position: -50px 0 !important; }
