@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main-v2-1.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         
     </head>
@@ -46,7 +46,11 @@
             <div class="map-container">
 
                 <div class="modal">
-                    <div class="close rnd-btn"></div>
+                    <ul class="buttons">
+                        <li class="close rnd-btn"></li>
+                        <li class="right rnd-btn direction"></li>
+                        <li class="left rnd-btn direction"></li>                    
+                    </ul>
                     <div class="data"></div>
                 </div>
 
@@ -66,10 +70,10 @@
 
                 <ul class="region-list">
                     <li data-num="0">Upper North</li><!--
-                    --><li data-num="1">Center North</li><!--
-                    --><li data-num="2">Lower North</li><!--
                     --><li data-num="3">Upper South</li><!--
-                    --><li data-num="4">Lower South</li>
+                    --><li data-num="1">Center North</li><!--
+                    --><li data-num="4">Lower South</li><!--
+                    --><li data-num="2">Lower North</li>                 
                 </ul>
 
                 <div class="slider-container">
@@ -100,7 +104,7 @@
                 <ul class="clear-fix">
                     <li class="left"><a href="http://www.silverfernfarms.com/" target="_blank">silverfernfarms.com</a></li>
                     <li class="vert-divider"></li>
-                    <li class="right">+64 6 872 6660</li>
+                    <li class="right">Ph: 03 477 3980</li>
                 </ul>
             </footer>
 
@@ -111,7 +115,7 @@
         <script src="js/plugins.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/main-v2-4-ck.js"></script>
 
     </body>
 

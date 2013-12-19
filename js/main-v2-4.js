@@ -2,13 +2,12 @@
 /*global Modernizr: true*/
 /*global Raphael: true*/
 /*global TweenMax: true*/
-/*global TimelineMax: true*/
 
-if(Raphael){
+//if(Raphael){
 
 	//alert('yes');
 
-}
+//}
 
 $(document).ready(function(){
 
@@ -34,6 +33,12 @@ $(document).ready(function(){
 
 			atvReg : null,
 
+			modal : {
+				region : '',
+				chef : '',
+				chefLen : ''
+			},
+
 			col : {
 				'drkGray' : 'rgb(27, 27, 27)', // '#1b1b1b'
 				'medGray' : 'rgb(77, 77, 77)', // '#4d4d4d'
@@ -47,19 +52,18 @@ $(document).ready(function(){
 					'region' : 'upper-north',
 					'path' : 'M193.083,89c1.336-0.651,2.067-1.948,2.466-3.25s0.463-2.609,0.467-3.282c-0.014,0.264-0.059,0.5-0.139,0.715s-0.193,0.412-0.346,0.598c-0.281,0.344-0.797,0.398-1.289,0.418s-0.961,0.004-1.148,0.207s-0.805,0.375-1.352,0.277s-1.023-0.465-0.93-1.34s0.062-1.984-0.074-3.031s-0.379-2.031-0.707-2.656s-0.461-0.859-0.789-0.938s-0.852,0-1.961,0s-2.227-0.164-3.191-0.398s-1.777-0.539-2.277-0.82s-0.539-0.203-0.645-0.156s-0.277,0.062-1.043-0.344s-1.344-0.781-1.621-1.156s-0.254-0.75,0.184-1.156s0.359-1.25,0.098-2.117s-0.707-1.758-1.004-2.258s-0.734-1.414-0.887-2.559s-0.02-2.52,0.824-3.941s1.539-1.977,1.887-2.477s0.348-0.945-0.199-2.148s-0.867-1.367-1.238-1.48s-0.793-0.176-1.543-1.176s-1.578-2.039-2.293-2.965s-1.316-1.738-1.613-2.285s-0.695-1.086-0.762-1.68s0.199-1.242,1.23-2.008s1.172-2.016,0.941-3.172s-0.832-2.219-1.285-2.609s-1-0.891-1.254-1.289s-0.215-0.695,0.504-0.68s0.977-0.086,0.977-0.371s-0.258-0.754-0.57-1.473s-0.417-1.573-0.683-2.362s-0.692-1.513-1.651-1.971c-0.958-0.458-1.166-1.708-1.354-3.052s-0.354-2.781-1.229-3.614s-1.292-1.021-1.49-0.854c-0.198,0.167-0.178,0.688-0.178,1.271s-0.438,0.604-0.969,0.667s-1.156,0.167-1.531,0.917s-1,0.604-1.438,0.114c-0.438-0.489-0.688-1.323-0.312-1.948s0.375-1.271,0.125-1.906s-0.75-1.26-1.375-1.844s-0.938-1.042-1.375-1.469s-1-0.823-2.125-1.281s-2.062-0.5-2.854-0.583c-0.791-0.083-1.438-0.208-1.979-0.833c-0.542-0.625-1.167-1.354-1.729-1.864c-0.562-0.511-1.062-0.802-1.354-0.552s-0.438,1.146-0.698,1.823s-0.636,1.135-1.386,0.51s-0.896-1.229-0.896-1.844c0.001-0.615,0.146-1.24-0.021-1.906s-0.438-0.354-0.761,0.198c-0.323,0.552-0.698,1.343-1.073,1.635s-1.229,0.396-2.031,0.062c-0.802-0.333-1.552-1.104-1.719-2.562c-0.166-1.458-0.687-2.167-1.312-2.656c-0.626-0.49-1.354-0.761-1.938-1.344c-0.583-0.583-1.208-0.812-1.75-1.156s-1-0.802-1.25-1.844s0.292-1.583,0.917-2.052c0.625-0.468,1.333-0.864,1.417-1.614s-0.104-0.75-0.677-0.667c-0.573,0.083-1.531,0.25-2.989-0.167s-2.396-0.75-2.99-0.844S129,0.458,128.917,1s-0.875,0.542-1.614,0.625c-0.74,0.083-1.427,0.25-1.302,1.125s1.5,1.896,3.021,2.938c1.521,1.042,3.188,2.104,3.896,3.062s1.208,2.188,1.75,3.479c0.542,1.292,1.125,2.646,2,3.854s1.584,2.333,2.115,3.292c0.531,0.958,0.886,1.75,1.053,2.292c0.166,0.542-0.146,0.729-0.615,0.948s-1.094,0.469-1.553,1.136c-0.458,0.667-0.562,1.188-0.427,1.729c0.136,0.542,0.511,1.104,1.011,1.854s1.125,1.75,1.781,2.719s1.344,1.906,1.969,2.531s1.146,1.208,1.698,1.833c0.552,0.625,1.136,1.292,1.886,2.083s2.791,3.125,5.021,5.917c2.229,2.792,4.646,6.042,6.146,8.667s2.416,4.396,3.031,5.667c0.614,1.271,0.927,2.042,1.219,2.667s0.521,1.229,0.781,1.542c0.26,0.312,0.552,0.333,0.969-0.208s1.042-0.708,1.438-0.969c0.396-0.26,0.562-0.614,0.062-1.531s-1.229-1.688-1.729-2.261c-0.5-0.573-0.771-0.948-0.354-1.073c0.417-0.125,1.084,0.417,1.719,0.927c0.636,0.511,1.24,0.99,1.531,0.74c0.292-0.25,0.688-0.458,1.104-0.604c0.417-0.146,0.854-0.229,1.229-0.229s0.188-0.812,0.104-1.354c-0.083-0.542-0.062-0.812,0.729,0.271c0.791,1.083,0.791,1.688,0.688,2.177c-0.104,0.49-0.312,0.865,0.062,1.49s-0.479,0.729-1.24,0.865c-0.761,0.135-1.428,0.302-0.678,1.052s1.396,0.583,1.886,0.427s0.823-0.302,0.948,0.49s-0.167,1-0.417,1.229c-0.25,0.229-0.458,0.479-0.167,1.354c0.292,0.875,0.479,2,0.479,2.667c0,0.667-0.188,0.875-0.646-0.083s-0.833-1.625-1.197-2.125c-0.365-0.5-0.72-0.833-1.137-1.125c-0.416-0.292-0.791-0.417-1.125-0.385c-0.333,0.031-0.625,0.219-0.875,0.552s-0.729,0.5-0.938,0.771c-0.208,0.271-0.146,0.646,0.688,1.396c0.834,0.75,1.021,1.167,1.188,1.688c0.167,0.521,0.312,1.146,1.062,2.312s1.229,2,1.615,2.698c0.386,0.698,0.678,1.26,1.053,1.885s0.458,2.188,0.844,3.552c0.385,1.365,1.072,2.532,2.656,2.365c1.583-0.167,1.844-1.406,2.094-2.214c0.25-0.807,0.489-1.182,2.031,0.38c0.219,0.223,0.062,0.402-0.076,0.577c-0.138,0.175-0.258,0.345,0.033,0.548c0.344,0.24,1.094,0.229,1.764,0.398c0.669,0.169,1.258,0.518,1.279,1.477c0,0,0.031,0.302-0.078,0.656s-0.359,0.76-0.922,0.969s-1.146,0.135-1.589,0.099s-0.745-0.037-0.745,0.318s0.083,0.812,0.052,1.141s-0.177,0.526-0.636,0.359c-0.458-0.167-0.406-0.542-0.333-0.927c0.073-0.386,0.167-0.781-0.208-0.99s-0.344-0.636-0.339-1.011S175.646,81,175.166,81c-0.479,0-1.207,0.135-1.723,0.427c-0.516,0.292-0.818,0.74-0.443,1.365s0.947,1.729,1.516,2.948c0.567,1.219,1.13,2.552,1.484,3.636c0.291,0.89,0.666,1.947,1.07,3.069s0.838,2.31,1.247,3.458c1.65-2.489,4.645-3.875,7.575-4.809C188.822,90.161,191.688,89.68,193.083,89z',
 					'chefs' : [
-						["Molten","Robert","Richardson","Head Chef","422 Mt Eden Road","Mt Eden","Auckland","09 638 7236","Slow roasted Silere Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Spring Lamb with seasonal vegetables. Garlic and salted lamb rump, pan-seared and roasted pink served with egg plant puree, peas, fior di laffe and white anchovy","silere"],
-						["The Food Store","Sunil","Kassote","Sous Chef","95-97 Market Square","Vaiduct Harbour","Auckland","09 377 0125","Cervena Venison","","Silver Fern Farms Beef Eye Fillet","Juniper and thyme marinated venison, smoked eel croquettes, celery puree, herb salsa and crispy potato using the Cervena Venison","cervena-venison"],
-						["No 1 High Street","Ramaiyah (James) ","Balakrishnan","Head Chef","Corner of High St and Shortland St","CBD","Auckland","09 377 7666","Silver Fern Lamb with Asian Flavour","Main","Silver Fern Farms Lamb Eye Fillet","Silver Fern grass fed lamb eye, masala yoghurt salsa, jasmine rice salad","sff-lamb"],
+						["Molten","Robert","Richardson","Head Chef","422 Mt Eden Road","Mt Eden","Auckland","09 638 7236","Slow roasted Silere Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Spring lamb with seasonal vegetables. Garlic and salted lamb rump, pan-seared and roasted pink served with egg plant puree, peas, fior di latte and white anchovy","silere"],
+						["The Food Store","Sunil","Kassote","Sous Chef","95-97 Market Square","Vaiduct Harbour","Auckland","09 377 0125","Cervena Venison","","Silver Fern Farms Venison Tenderloin","Juniper and thyme marinated venison, smoked eel croquettes, celery puree, herb salsa and crispy potato using the Cervena Venison","cervena-venison"],
+						["No 1 High Street","Ramaiyah (James) ","Balakrishnan","Head Chef","Corner of High St and Shortland St","CBD","Auckland","09 377 7666","Silver Fern Farms Lamb with Asian Flavour","Main","Silver Fern Farms Lamb Eye of Round","Silver Fern Farms grass fed lamb eye of round, masala yoghurt salsa, jasmine rice salad","sff-lamb"],
 						["Annabelle's","Susan ","Cho","Owner","409 Tamaki Drive","St Heliers","Auckland","09 575 5239","Eye Fillet of Beef","Main","Silver Fern Farms Beef Eye Fillet","Eye fillet with mustard mash potato, spinach balsamic roast tomato and thyme jus","sff-beef"],
 						["Vinnie's","Andrew","Hanson","Head Chef","166 Jervois Road","Herne Bay","Auckland","09 360 4340","Loin Fillet","Main","Silere Alpine Origin Merino Lamb Loin Fillet","Silere Alpine Origin Merino, goats cheese gnocchi, beetroot, young fennel, lamb and pernod juices. The inspiration was to create a dish that complimented the lamb without over powering it, to allow the sweetness of the lamb to shine through and do something interesting with a secondary cut (Lamb Flap)","silere"],
-						["Mudbrick Winery","Mathias","Schmitt","Head Chef","Church Bay Road","Waiheke 1091","Auckland","09 372 9050","Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Alpine Origin Merino Lamb Rump, BBQ, sage, chilli, ale, (BBQ suace marinated rump then grilled on the BBQ , Banana / Potatoe Moussillinni something and patotoe struesel, crispy sage, pickled chillies)","silere"],
-						["O’Connell Street Bistro","Alex","Strobach","Head Chef","3 O'Connell St","","Auckland","09 377 1884","Silver Fern Farms Venison Loin with creme fraiche spatzle","Main","Cervena Vension Loin ","Silver Fern Farms Venison Loin creme fraiche spatzle sauteed rainbow chard, mushrooms and green peppercorn jus. The Head Chef is German born and a hunter. This inspired him and is integrated into the dish","cervena-venison"],
-						["La Fourchette","Sophie","Phipps","Exec Chef","8 Turua Street","St Heliers","Auckland","09 215 8332","Cote de Bueuf for 1 or 2","Main","Reserve rib eye of beef, 450g or 700g","","reserve"],
-						["Vue Restaurant","Sharyn","Gratton","Exec Chef","8 Customs Street","Mercure Auckland","Auckland","09 302 9412","Lamb rack","Main","Silere Alpine Origin Merino Lamb Rack","Silere Lamb rack. Pomme puree, glazed baby carrots, blueberry beurre range. The inspiration comes from keeping the lamb rack simple and fresh and adding an innovative sauce","silere"],
-						["Toto","Sergio","Maglione","Chef /Owner","53 Nelson Street","CBD","Auckland","09 302 2665","Tagliatelle.","Main","Silere Alpine Origin Merino Lamb Rump","Marinated merino lamb rump tagliatelle, oven roasted summer eggplant, semi dry tomato,","silere"],
+						["Mudbrick Winery","Mathias","Schmitt","Head Chef","Church Bay Road","Waiheke 1091","Auckland","09 372 9050","Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Alpine Origin Merino Lamb Rump, BBQ, sage, chilli, ale, (BBQ sauce marinated rump then grilled on the BBQ , banana /potato moussillinni and patotoe struesel, crispy sage, pickled chillies)","silere"],
+						["OConnell Street Bistro","Alex","Strobach","Head Chef","3 O'Connell St","","Auckland","09 377 1884","Silver Fern Farms Venison Loin with creme fraiche spatzle","Main","Cervena Vension Loin ","Silver Fern Farms Venison Loin creme fraiche spatzle sauteed rainbow chard, mushrooms and green peppercorn jus. The Head Chef is German born and a hunter. This inspired him and is integrated into the dish","cervena-venison"],
+						["La Fourchette","Sophie","Phipps","Exec Chef","8 Turua Street","St Heliers","Auckland","09 215 8332","Cote de Bueuf for 1 or 2","Main","Reserve rib eye of beef, 450g or 700g","Inspiration to create a steak dish, uncomplicated by over handling and not buried in noisy garnish, just quality meat, skilfully cooked. OP Rib eye, manuka smoked potato puree, quince jelly, caramelised prunes, confit fennel and port wine jus.","reserve"],
+						["Toto","Sergio","Maglione","Chef /Owner","53 Nelson Street","CBD","Auckland","09 302 2665","Tagliata di agnello","Main","Silere Alpine Origin Merino Lamb Rump","Marinated merino lamb rump tagliata, oven roasted summer eggplant, semi dry tomato,","silere"],
 						["Poderi Crisci","Antonio","Crisci","Owner","205 Awaawaroa Road","Awaawaroa Bay","Waiheke Island","09 379 0400","Medaglione Di Cervo marinato alla sapa con vulcano di polenta e verdurine di stagione","","Cervena Vension Leg ","Medallions of Silver Fern Farm venison leg marinated in spiced Poderi Crisci 'sapa' with polenta volcano, pan juice braised garden vegetables matched with Poderi Crisci Virburno 2009","cervena-venison"],
 						["DeBretts kitchen ","Michelle","Deery ","Owner","2 High St","","Auckland","09 969 1545","","","Cervena Venison Loin","Silver Fern Farms venison loin, beetroot, pineapple, spiced venison sausage, pistachio","cervena-venison"],
-						["a Deco","Brenton ","Low","Chef/Owner","70 Kamo Road","Kensington","Whangarei ","09 459 4957","Venison 'Chop'","Main","Cervena Venison Rack ","Oven roasted Silver Fern Farm Venison rack with creamed cauliflower cheese, slow-cooked osso bucco 'pie' BBQ asparagus, carrot and current salad. Inspired by kiwi classics done in an unusual and different way","cervena-venison"]
+						["a Deco","Brenton ","Low","Chef/Owner","70 Kamo Road","Kensington","Whangarei ","09 459 4957","Venison 'Chop'","Main","Cervena Venison Rack ","Oven roasted Silver Fern Farms Venison rack with creamed cauliflower cheese, slow-cooked osso bucco 'pie' BBQ asparagus, carrot and current salad. Inspired by kiwi classics done in an unusual and different way","cervena-venison"]
 					]
 				}, // end of upper-north obj
 				{
@@ -68,13 +72,17 @@ $(document).ready(function(){
 					'chefs' : [
 						["Pumice Bistro","Carl","Houben","Head Chef","62 Church Road","","Hamilton ","07 850 9339","Taste of Beef","Main","Reserve Eye Fillet with Reserve Beef Short Rib ","Silver Fern Farm reserve eye fillet with soy and beer braised short ribs, potato chorros and micro rocket ","reserve"],
 						["Agenda Restaurant","Joshua","Kanara-Bailey","Head Chef","145 Victoria Street","Hamilton Central","Hamilton","07 929 2332","Spiced Lamb","Main","Silver Fern Farms Lamb Rump","New Zealand Lamb rump, marinated in the chef's own mix of spices, with a chorizo and white bean cassoulet, seasonal vegetables and port wine jus","sff-lamb"],
-						["The Woodbox","Kane","Findlater","Head Chef","25 Angus Road","Ohaupo","Hamilton","07 823 6411 ","Taste of Beef","Main","Reserve Eye Fillet","Reserve Eye Fillet, confit beef cheek, smoked carpaccio with habanero mustard, exotic mushrooms, dauphinos and merlot jus. The inspiration was to combine Silver Fern Farms cuts and textures on one plate to give the customer diversity of the product","reserve"],
-						["Bluestone Steak House","Michael","Huitema","Head Chef","186 Victoria Street","","Hamilton","07 839 5152","Smoke Venison Loin","Main","Silver Fern Farms venison short loin","Venison short loin with honey smoked cauliflower roast baby beetroot, water cress pumpkin dried blue berry's and raspberry vinegar","sff-venison"],
+						["The Woodbox","Kane","Findlater","Head Chef","25 Angus Road","Ohaupo","Hamilton","07 823 6411 ","Taste of Beef","Main","Reserve Eye Fillet","Reserve Eye Fillet, confit beef cheek, smoked carpaccio with habanero mustard, exotic mushrooms, dauphinios and merlot jus. The inspiration was to combine Silver Fern Farms cuts and textures on one plate to give the customer diversity of the product","reserve"],
+						["Bluestone Steak House","Michael","Huitema","Head Chef","186 Victoria Street","","Hamilton","07 839 5152","Smoke Venison Loin","Main","Silver Fern Farms venison short loin","Venison short loin with honey smoked cauliflower, roast baby beetroot, dried blueberries, watercress, pumpkin and raspberry vinegar","sff-venison"],
+						["Palate","Mat ","Mclean","Chef","20 Alma Street","","Hamilton","07 834 2921","Reserve Beef","Main","Reserve Eye fillet and shortrib","Silver Fern Farms Reserve eye fillet and slow cooked shortrib, smoked kumara, shitaki salad, baby turnips and chilli soy butter","reserve"],
+						["Victoria Street Bistro","Andrew","Clarke","Head Chef","153 Victoria Street","","Hamilton","07 839 4444","Spiced Merino Duo","Main","Silere Rumb and Short Rib","","silere"],
 						["Peppers on the Point ","Craig ","Martin","Head Chef","214 Kawaha Pt Road","","Rotorua","07 348 1038","Flavours of Spring","Main","Silere Alpine Origin Merino Lamb Rump and Silere Alpine Origin Merino Lamb Rack","Sousvide rump and rack with crispy sweetbreads, sweet peas, goats feta, artichoke & olive powder and a light garlic foam","silere"],
-						["Pavilion Restaurant","Sjaack","Roos","Exec Chef","390 Fenton Street","Distinction Hotel","Rotorua","07 349 5200","From the Grill","Main","Silver Fern Farms Sirloin and Eye Fillet","","sff-beef"],
+						["Pavilion Restaurant","Sjaack","Roos","Exec Chef","390 Fenton Street","Distinction Hotel","Rotorua","07 349 5200","From the Grill","Main","Silver Fern Farms Sirloin and Eye Fillet","250 gram prime Silver Fern Farms sirloin, Pacific style with tempura king prawn, rock oyster, kumara rosti & red wine jus","sff-beef"],
 						["Mills Reef and Winery","Attila ","Kovacs","Exec Chef","143 Moffat Road","Bethlehem","Tauranga","07 576 8800","Lamb Loin Wellington","Main","Silver Fern Farms Lamb Short Loin","Silver Fern Farms lamb loin wellington, porcini deluxe, honey roasted yellow beetroot puree, spring asparagus, potato fondant, syrah demi glaze","sff-lamb"],
-						["Phil’s Place","Daniel","Green","Head Chef","101 Tauranga Bridge marina","","Tauranga","07 574 4147","Reef N Beef","Main","Silver Fern Farms Beef Rib Eye","Silver Fern Farms beef rib eye, a whole slipper lobster with a creamy garlic white wine sauce. This dish is inspired by the New Zealand coastline and wide open pastures. This dish showcases what NZ has to offer: great beef and great seafood","sff-beef"],
-						["Halo Restaurant","Simon","Green","Exec Chef","Trinity Wharf Hotel","51 Dive Crescent","Tauranga ","07 577 8705","Poached Eye Fillet","Main","Reserve Eye Fillet and Reserve Short Rib","Poached Eye Fillet with braised short rib, truffled leek and wild mushroom pie, pea puree and thyme jus labelled on menu under SFF Premier selection Beef staying with traditional flavour combinations putting an up to date spin on them","reserve"]
+						["Pepper Tree Restaurant","Scott","Corbett","Head Chef","31 Kapanga Road","","Coromandel","07 866 8211","Silver Fern Farms Venison","Main","Silver Fern Farms Venison","Venison cutlet served med-rare with blackberry and tamarillo jelly, venison liver pate, almond crusted kumara, walnuts, witlof salad, syrah jus. A great opportunity to create a dish using a premium cut that normally would not be offered on our menu.","sff-venison"],
+						["The Falls Retreat","Emma","Walters","Chef","25 Waitawheta Rd","","Waihi","07 863 8770","Lamb 2 Ways","Main","Silver Fern Farms Lamb","Wood roasted petite Silver Fern Farms lamb rack with a chickpea & cashew crust served with a braised lamb shoulder pie, celeriac remoulade and red wine jus","sff-lamb"],
+						["Phils Place","Daniel","Green","Head Chef","101 Tauranga Bridge marina","","Tauranga","07 574 4147","Reef N Beef","Main","Silver Fern Farms Beef Rib Eye","Silver Fern Farms beef rib eye, a whole slipper lobster with a creamy garlic white wine sauce. This dish is inspired by the New Zealand coastline and wide open pastures. This dish showcases what NZ has to offer: great beef and great seafood","sff-beef"],
+						["Halo Restaurant","Simon","Green","Exec Chef","Trinity Wharf Hotel","51 Dive Crescent","Tauranga ","07 577 8705","Poached Eye Fillet","Main","Reserve Eye Fillet and Reserve Short Rib","Poached Eye Fillet with braised short rib, truffled leek and wild mushroom pie, pea puree and thyme jus labelled on menu under Silver Fern Farms Premier Selection Reserve Beef staying with traditional flavour combinations putting an up to date spin on them","reserve"]
 					]
 				}, // end of center-north obj
 				{
@@ -82,20 +90,20 @@ $(document).ready(function(){
 					'path' : 'M223,132.917c-6.542-2.542-12.209-2.146-17.688-1.955s-10.771,0.178-16.562-3.182c-3.067-1.779-5.603-2.724-7.913-3.127c-2.31-0.403-4.394-0.266-6.56,0.118c-0.018,0.108-0.037,0.214-0.056,0.321c-0.019,0.106-0.038,0.214-0.055,0.325c-0.354,2.333-0.771,4.531-1.308,6.344c-0.536,1.812-1.192,3.24-2.025,4.031c-0.834,0.792-2.032,1.229-3.246,1.542c-1.213,0.312-2.442,0.5-3.338,0.792s-1.375,0.677-2.042,1.219s-1.521,1.239-3.167,2.156c-1.646,0.917-3.364,1.552-4.516,2.391c-1.15,0.838-1.734,1.88-1.109,3.609s1.125,3.146,2.24,4.37c1.115,1.224,2.844,2.255,5.928,3.213c3.083,0.958,4.958,1.948,6.26,2.927s2.031,1.948,2.822,2.865c0.792,0.917,1.136,1.573,1.678,1.974c0.542,0.401,1.281,0.547,2.865,0.443c1.583-0.104,3.76,0.417,5.879,1.943c2.12,1.526,4.183,4.058,5.537,7.974s0.959,7.667-0.156,11.063c-1.115,3.396-2.948,6.438-4.469,8.938s-3.104,4.583-4.469,6.234c-1.365,1.65-2.511,2.869-3.156,3.641c-0.646,0.771-1.333,1.302-1.708,1.75c-0.375,0.447-0.438,0.812,0.167,1.25c0.604,0.438,1.218,0.521,1.843,0.677c0.626,0.155,1.261,0.385,1.907,1.114c0.646,0.729,1.364,1.469,2.083,2c0.718,0.531,1.437,0.854,2.083,0.75s0.719-0.604,0.85-1.006c0.13-0.4,0.317-0.702,1.192-0.41c0.875,0.291,1.573,0.135,2.01,0.114c0.438-0.021,0.614,0.094,0.448,0.927s0,1.802,0.312,2.688c0.312,0.885,0.771,1.688,1.188,2.188s0.969,0.885,1.725,0.953c0.755,0.067,1.713-0.183,2.942-0.953s3.864-2.854,6.755-5.604s6.037-6.167,8.287-9.604s3.385-6.083,4.484-8.281c1.099-2.198,2.161-3.948,4.266-5.595c1.234-0.966,2.167-2.359,3.017-3.846c0.851-1.486,1.618-3.065,2.524-4.404c0.638-0.942,1.242-1.328,1.952-1.978c0.711-0.65,1.527-1.564,2.59-3.564s1.667-3.906,2.119-5.672c0.453-1.766,0.755-3.391,1.214-4.828s0.99-2.25,1.219-2.817c0.229-0.568,0.156-0.891-0.594-1.349s-1.697-1.448-2.364-2.516s-1.052-2.213-0.677-2.984s1.322-2.521,2.817-4.339c1.495-1.817,3.536-3.703,6.099-4.745c0.715-0.291,1.428-0.514,2.129-0.682c0.702-0.168,1.393-0.281,2.063-0.351c-0.839-1.669-2.43-2.965-5.055-4.327C231.637,136.278,227.977,134.851,223,132.917z',
 					'chefs' : [
 						["Elephant Hill","Ashley ","Jones","Exec Chef","86 Clifton Road","Te Awanga","Hawkes Bay","06 872 6060","Beef Fillet","Main","Reserve Eye Fillet","Beef eye fillet, potato mousse, fried marrow, oyster mushrooms, garlic confit. Inspired by the wonderful flavours of Silver Fern Farms beef eye fillet","reserve"],
-						["Mister D","David","Griffiths","Chef","47 Tennyson Street","","Napier","06 835 5022","SFF Angus petit tender, olive oil poached, fuikake seasonal miso requette","Main","Petit Tender Angus","","angus"],
+						["Mister D","David","Griffiths","Chef","47 Tennyson Street","","Napier","06 835 5022","Petit Tender Angus, olive oil poached, furikake seasonal miso requette","Main","Petit Tender Angus","Silver Fern Farms Angus petit tender, olive oil poached furikake, seasoned miso roquette","angus"],
 						["Grand Central Hotel","Ashika","Mudaliar","Head Chef","42 Powderham Street","","New Plymouth","06 758 7495","Pistachio Crusted Venison","Entrée","Silver Fern Farms Venison Short Loin","Pan seared pistachio crusted venison sliced on a smoked aubergine puree, finished with caramelised scallops, red wine jus and micro green herbs","sff-venison"],
-						["Nero","Scott","Kennedy","Chef/Owner","36 Amesbury Street","","Palmerston North","06 3540312","Vadonvon crumbed Silere Loin Fillets","Main Lunch and Dinner","Silere Alpine Origin Merino Lamb Loin and Silere Alpine Origin Merino Lamb Shoulder","Lamb loin chargrilled and served rare, enhanced with an agria mash tossed through a minted pea puree and a home made Yorkshire pudding filled with a mouth watering lamb shank ragu","silere"],
-						["Table 188 Kitchen and Bar","Ryan","Marshall","Head Chef/Owner","3 Campbell Street","","Palmerston North","06 3530076","Silere Merino Lamb loin","Main","Silere Alpine Origin Merino Lamb Loin and Silere Alpine Origin Merino Lamb Shank","Silere Merino Lamb loin chargrilled and served rare, enhanced with an agria mash tossed through a minted pea puree and a home made Yorkshire pudding filled with a mouth watering lamb shank ragu","silere"],
-						["Bethany’s Restaurant","Michael","Brill","Head Chef","32a The Square","","Palmerston North","06 351 6322","Succulent Beef Short Rib","Entrée","Silere Alpine Origin Merino Lamb Short Rib","Masterstock beef short rib with edamame and bean salsa and soy pumpkin seeds. My inspiration to create this dish was simply about making the most flavoursome and succulent short rib around, I chose to take an Asian path with soy based masterstock","silere"],
-						["The Co-op","Andrew","Wood","Head Chef","69a Discovery Drive","Whitby","Porima","04 234 1580","Sous Vide Lamb rack","Main","Silver Fern Farms Lamb Rack","Sous vide rack, served on a bed of chickpeas. Broad beans and confit cherry tomatoes. Accompanied by a mushroom, spinach and sage stuffing and a beetroot puree. This has been inspired by European and New Zealand ingredients, put together using simple techniques of modern cuisine, resulting with this fusion dish","sff-lamb"],
+						["Nero","Scott","Kennedy","Chef/Owner","36 Amesbury Street","","Palmerston North","06 3540312","Vadonvon crumbed Silere Alpine Origin Merino Lamb Loin Fillits","Main Lunch and Dinner","Silere Alpine Origin Merino Lamb Loin","Lamb loin char gilled and served rare, enhanced with an agria mash tossed through a minted pea puree and a home made Yorkshire pudding filled with a mouth watering lamb ragu","silere"],
+						["Table 188 Kitchen and Bar","Ryan","Marshall","Head Chef/Owner","3 Campbell Street","","Palmerston North","06 3530076","Silere Merino Lamb loin","Main","Silere Alpine Origin Merino Lamb Short Rib ","Silere Merino Lamb loin chargrilled and served rare, enhanced with an agria mash tossed through a minted pea puree and a home made Yorkshire pudding filled with a mouth watering lamb shank ragu","silere"],
+						["Bethanys Restaurant","Michael","Brill","Head Chef","32a The Square","","Palmerston North","06 351 6322","Succulent Beef Short Rib","Entrée","Silver Fern Farms Reserve Beef","Masterstock beef short rib with edamame and bean salsa and soy pumpkin seeds. My inspiration to create this dish was simply about making the most flavoursome and succulent short rib around, I chose to take an Asian path with soy based masterstock","reserve"],
+						["The Co-op","Andrew","Wood","Head Chef","69a Discovery Drive","Whitby","Porima","04 234 1580","Sous Vide Lamb rack","Main","Silver Fern Farms Lamb Rack","Sous vide rack, served on a bed of chickpeas, broad beans and confit cherry tomatoes. Accompanied by a mushroom, spinach and sage stuffing and a beetroot puree. This has been inspired by European and New Zealand ingredients, put together using simple techniques of modern cuisine, resulting with this fusion dish","sff-lamb"],
 						["Waimea Restaurant","Michele ","Passarello","Head Chef/Owner","No 1 Waimea Road","","Waikanae Beach","04 293 4240","Sicilian Lamb rump","Main","Silere Alpine Origin Merino Lamb Rump","Lamb rump, green olive crusted lambs brain, aubergine agro dolce, spicy pumpkin, black olive soil. I have been inspired by local produce, alpine NZ merino lamb and my Sicilian heritage to create a dish that uses traditional and modern techniques to maximise the flavour of the lamb","silere"],
-						["Wakefields","Richard ","Samways","Exec Chef","West Plaza Hotel","110 Wakefield street","Wellington","04 473 1440","Short Rib + Brisket Pattie, Café De Paris Mayo, Emmental, Sesame Broche Bun","Main Course","Silver Fern Farms Beef Short Rib and brisket","Wanted to know exactly what was going in the pattie. Turning the classic 'café de Paris' flavour unto a sauce for the housemade brioche bun. The brioche gives a slight sweetness that goes great with the Emmental and beef.","sff-beef"],
-						["Logan Brown","Shaun ","Clouston","Chef/Partner","192 Cuba St","Te Aro","Wellington","04 801 5114","Premier Selection Beef Rump, pear braised rib, sesame leaf, barley cake and kin ch","Main","Reserve Premier Selection Beef Rump and Ribs","I have always been inspired been inspired by the Korean Chef I have worked with over the years. I love the clean, fresh and interesting flavours in their cuisine. With the quality of the Premier Beef, the flavours and textures are amazing","reserve"],
-						["Scopa Caffe Cucina","Jack","O'Donnell","Head Chef","141 Cuba Street","Te Aro","Wellington","027 235 6414","Seared SFF Venison","Entrée/salad","Silver Fern Farms Venison Loin","The inspiration for this dish is taken from the superior quality of SFF's venison loin and how best to showcase this product in an original and interesting manner. The creaminess of whipped goats cheese serves to offset the caramalisation on the seared loin while the cheese's infusion of juniper compliments the meat's exotic qualities. The pairing of beetroot further enhances the meats earthy characteristics and the hazelnut praline and vincotto draw one's attention to the particular sweetness of SFF's venison loin while the lightly dressed spring greens offset this sweetness and bring the dish's components together to subsequently underline this product's potential","sff-venison"],
-						["Muse on Allen","Samuel ","North","Head Chef","16-18 Allen Street","Te Aro","Wellington","021 066 3984","Boneless Lamb Rack","Main","Silere Alpine Origin Merino Lamb Rack","My dish will be served with young beetroots, a beetroot gel, beetroot powder, goats cheese mousse braised balsamic lentils, this dish has been inspired by taking a few simple ingredients and changing them into something attractive and tasty","silere"],
-						["One 80 Restaurant","Chetan","Pangam","Exec Chef/F&B manager","Level 7, Copthorne Hotel","Oriental Bay, 100 Oriental Parade","Wellington","04 385 0279","Duo of Silere Alpine origin Merino Lamb","Main","Silere Alpine Origin Merino Lamb Rump and Silere Alpine Origin Merino Lamb Rib","Dukkah roast silere lamb rumps, braised ribs, sesame crumbed sweetbreads potenta, confit beetroot, baby carrots, lamb jus. Vibrant fresh spring inspired dish, where the lamb is the hero of the dish","silere"],
-						["Pravda Café","Adam","Rickett","Head Chef","107 Custom House Quay","","Wellington","04 801 8858","Beef Tataki with Pickled enoki","Entrée","Reserve Beef Sirloin","Seared beef tataki with white soy ponzu, pickled evoke and toasted grains. To truly showcase the quality and flavour of the beef I wanted to present it in its purest form, for me this is raw. I have drawn from recent travels around Europe and Japan to create a balanced dish with the SFF product at the centre","reserve"],
-						["Foxglove","Joshua","Dodd","Head Chef","33 Queens Wharf","","Wellington","027 431 5900","Venison tartar","","Silver Fern Farms Vension Denver Leg","Venison tartar, horseradish, potato, wood sorel and juniper. Inspiration comes from local foraged wood sorrell and the change of the seasons","sff-venison"]
+						["Wakefields","Richard ","Samways","Exec Chef","West Plaza Hotel","110 Wakefield street","Wellington","04 473 1440","Short Rib + Brisket Pattie, Café De Paris Mayo, Emmental, Sesame Brioche Bun","Main Course","Silver Fern Farms Beef Short Rib and brisket","Wanted to know exactly what was going in the pattie. Turning the classic 'café de Paris' flavour unto a sauce for the housemade brioche bun. The brioche gives a slight sweetness that goes great with the Emmental and beef.","sff-beef"],
+						["Logan Brown","Shaun ","Clouston","Chef/Partner","192 Cuba St","Te Aro","Wellington","04 801 5114","Premier Selection Beef Rump, pear braised rib, sesame leaf, barley cake and kim ch","Main","Reserve Premier Selection Beef Rump and Ribs","I have always been inspired by the Korean Chef I have worked with over the years. I love the clean, fresh and interesting flavours in their cuisine. With the quality of the Premier Beef, the flavours and textures are amazing","reserve"],
+						["Scopa Caffe Cucina","Jack","O'Donnell","Head Chef","141 Cuba Street","Te Aro","Wellington","04 384 6020","Seared Silver Fern Farms Venison","Entrée/salad","Silver Fern Farms Venison Loin","The inspiration for this dish is taken from the superior quality of Silver Fern Farms venison loin and how best to showcase this product in an original and interesting manner. The creaminess of whipped goats cheese serves to offset the caramalisation on the seared loin while the cheese's infusion of juniper compliments the meat's exotic qualities. The pairing of beetroot further enhances the meats earthy characteristics and the hazelnut praline and vincotto draw one's attention to the particular sweetness of Silver Fern Farms venison loin while the lightly dressed spring greens offset this sweetness and bring the dish's components together to subsequently underline this product's potential","sff-venison"],
+						["Muse on Allen","Samuel ","North","Head Chef","16-18 Allen Street","Te Aro","Wellington","04 384 1181","Boneless Lamb Rack","Main","Silere Alpine Origin Merino Lamb Rack","My dish will be served with young beetroots, a beetroot gel, beetroot powder, goats cheese mousse braised balsamic lentils, this dish has been inspired by taking a few simple ingredients and changing them into something attractive and tasty","silere"],
+						["One 80 Restaurant","Chetan","Pangam","Exec Chef","Level 7, Copthorne Hotel","Oriental Bay, 100 Oriental Parade","Wellington","04 385 0279","Duo of Silere Alpine origin Merino Lamb","Main","Silere Alpine Origin Merino Lamb Rump and Silere Alpine Origin Merino Lamb Rib","Dukkah roast silere lamb rumps, braised ribs, sesame crumbed sweetbreads potenta, confit beetroot, baby carrots, lamb jus. Vibrant fresh spring inspired dish, where the lamb is the hero of the dish","silere"],
+						["Pravda Café","Adam","Rickett","Head Chef","107 Custom House Quay","","Wellington","04 801 8858","Beef Tataki with Pickled enoke","Entrée","Reserve Beef Sirloin","Seared beef tataki with white soy ponzu, pickled enoke and toasted grains. To truly showcase the quality and flavour of the beef I wanted to present it in its purest form, for me this is raw. I have drawn from recent travels around Europe and Japan to create a balanced dish with the Silver Fern Farms product at the centre","reserve"],
+						["Foxglove","Joshua","Dodd","Head Chef","33 Queens Wharf","","Wellington","04 460 9410","Venison tartar","","Silver Fern Farms Vension Denver Leg","Venison tartar, horseradish, potato, wood sorel and juniper. Inspiration comes from local foraged wood sorrell and the change of the seasons","sff-venison"]
 					]
 				}, // end of lower-north obj
 				{
@@ -104,13 +112,13 @@ $(document).ready(function(){
 					'chefs' : [
 						["Chillingworth Road","Darren","Wright","Exec Chef","478 Cranford Street","Papanui","Christchurch ","03 352 7784","Silere Merino Lamb","Main","Silere Alpine Origin Merino Lamb Loin ","Lamb loin and lamb sweetbreads. Pecorino tart, bolotti beans, asparagus and peas with a lamb jus","silere"],
 						["Saggio Di Vino","Sebastian ","Koburg","Head Chef","179 Victoria Street","","Christchurch ","03 379 4006","Sweet and Sour Lamb","Main","Silere Alpine Origin Merino Lamb French Rack","Grilled roasted lamb french rack with sweet and sour kumara, sage and radicchio","silere"],
-						["Curators House","William","Sands","Exec Chef","7 Rolleston Avenue","Botanic Gardens","Christchurch ","03 378 2252","New Zealand Cervena","Main","Silver Fern Farms Vension Denver Leg","Denver Leg served atop braised red cabbage, pomme dauphine and a juniper berry reduction. I grew up in gastro pub all my life and it is one of the most versatile proteins you can use. Served with traditional accompaniments with little twists here and there to champion the venison as the hero","sff-venison"],
+						["Curators House","William","Sands","Exec Chef","7 Rolleston Avenue","Botanic Gardens","Christchurch ","03 378 2252","New Zealand Cervena","Main","Silver Fern Farms Cervena Vension Denver Leg","Denver Leg served atop braised red cabbage, pomme dauphine and a juniper berry reduction. I grew up in gastro pub all my life and it is one of the most versatile proteins you can use. Served with traditional accompaniments with little twists here and there to champion the venison as the hero","cervena-venison"],
 						["Pescatore","Reon","Hobson","Chef de cuisine","50 Park Terrace","","Christchurch","03 371 0257","Silere Lamb - Brown butter poached","Main","Silere Alpine Origin Merino Lamb Loin ","Canterbury's close association with the Alpine Ranges makes Silere Merino an obvious choice. I have chosen a smokey element and nutty rich butter flavours to compliment the rich robust flavours of the merino. The onion element offers a stronger savoury note and supports with a textural variance included with the tempura onion ring. The parsley compliments the dish with herbvous flavour and vibrant colour","silere"],
-						["Hopgood’s Restaurant","Aaron","Ballantyne","Head Chef","284 Trafalgar Street","","Nelson","03 545 7191","Silver Fern Farms lamb rump & slow cooked shoulder, faro beans, smoked aubergine, broad beans & yogurt","Main","Silver Fern Farms Lamb Rump (cap on) and a Half Oyster Shoulder","I wanted to showcase two of my favourite cuts of lamb in a nice light spring/summer dish. Lamb rump is slow cooked sous vide, rolled in herbs, seared crispy and sliced. Shoulder is braised at low temperature overnight. Then pressed and heated in a light lamb jus. The dish is served with a fried faro cake, smoked aubergine puree, roast beets and a light broad bean salad with salsa dressed with local sheep's yogurt, olive oil and herbs","sff-lamb"],
+						["Hopgoods Restaurant","Aaron","Ballantyne","Head Chef","284 Trafalgar Street","","Nelson","03 545 7191","Silver Fern Farms lamb rump & slow cooked shoulder, farro beets, smoked aubergine, broad beans & yoghurt","Main","Silver Fern Farms Lamb Rump (cap on) and a Half Oyster Shoulder","I wanted to showcase two of my favourite cuts of lamb in a nice light spring/summer dish. Lamb rump is slow cooked sous vide, rolled in herbs, seared crispy and sliced. Shoulder is braised at low temperature overnight. Then pressed and heated in a light lamb jus. The dish is served with a fried farro beets, smoked aubergine puree, roast beets and a light broad bean salad with salsa dressed with local sheep's yoghurt, olive oil and herbs","sff-lamb"],
 						["Mint Dining Room","Grant","Dicker","Owner/Chef","20 Harley Street","","Nelson","03 546 7092","Trio of Silere Merino Lamb","Main","Silere Alpine Origin Merino Lamb Rump (cap on) and a Oyster Shoulder","Slow cooked silere merino lamb shoulder served two ways, roasted rump, creamed leeks and provencale flavours. Fresh seasonal flavours and classic techniques to bring out the best in the Alpine raised lamb. ","silere"],
-						["Theatre Royal Hotel","Alex","Ensor","Exec Chef","81 Seddon Street","Kumara","West Coast","03 736 9277","Venison 3 ways with truffle","Main","Cervena Venison Short Loin ","Silver fern venison short loin, truffled… parsnip puree, baby turnips, watercress petels, venison marrow jus. Inspired by growing up on the coast and hunting deer combined with cooking styles learned abroad","cervena-venison"],
-						["Station’s Inn","Drew","Boyling","Head Chef","Blue Spur Road","","Hokitika","03 755 5499","Venison fillet, pepper crusted with crumbed brie and blueberry chutney","Main","Cervena Venison Loin Fillet","200g portion of venison loin fillet rolled in a mixed pepper crust and pan seared to medium rare. Well rested and sliced with homemade blueberry chutney and crumbed brie. Nice and simple complimenting flavours acts as a sauce component","cervena-venison"],
-						["Millie’s Café","Ang","Williams","Owner","35 Weld Street","","Hokitika","027 238 5710","Springtime","Lunch","Silver Fern Farms Lamb Shoulder, Tongue, Livers","I have tried to capture and showcase spring and also the West Coast. Using different techniques, spring flowers, pikopiko powder and the fern, a local beer, this is a stunning dish","sff-lamb"],
+						["Theatre Royal Hotel","Alex","Ensor","Exec Chef","81 Seddon Street","Kumara","West Coast","03 736 9277","Venison 3 ways with truffle","Main","Cervena Venison Short Loin ","Silver fern venison short loin, truffled beurre noisette, parsnip puree, baby turnips, red raddish, braised shallots, venison sweetbreads croutons, watercress petels, venison marrow jus. Inspired by growing up on the coast and hunting deer combined with cooking styles learned abroad","cervena-venison"],
+						["Stations Inn","Drew","Boyling","Head Chef","Blue Spur Road","","Hokitika","03 755 5499","Venison fillet, pepper crusted with crumbed brie and blueberry chutney","Main","Cervena Venison Loin Fillet","200g portion of venison loin fillet rolled in a mixed pepper crust and pan seared to medium rare. Well rested and sliced with homemade blueberry chutney and crumbed brie. Nice and simple complimenting flavours, the melting brie acts as a sauce component","cervena-venison"],
+						["Panorama Restaurant","Kane","Bambery","Exec Chef","89 Terrace Road","Aoraki/Mt Cook","South Canterbury","03 435 1809","Times have changed","Entrée","Silere Alpine Origin Merino Lamb Loin","Inspiration comes from the change in seasons and nature itself. Dish can be described as young and tender.","silere"],
 						["The Tea House","Heath","Bashford","Head Chef","6 Robert Street","","Lincoln","03 325 7242","Herb crusted venison rack","Main","Silver Fern Farms French Rack of Venison","Thyme and mustard crusted French rack of venison served with a tamarillo tortellini, slow roasted tomatoes and shallots with a pinot noir reduction","sff-venison"]
 					]
 				}, // end of upper-south obj
@@ -122,26 +130,25 @@ $(document).ready(function(){
 						["Wild Earth","David","Harrison","Head Chef","803 Kawarua Gorge Road","Cromwell","Central Otago","03 445 4841","Twice Barrel Cooked Lamb Rump","Tasting","Silver Fern Farms Lamb Rump","Lamb rump marinated in Wild Earth Pinot and wild thyme. Cooked twice in our Pinot Barrel cookers served over spiced quinoa, caponata and gremolata cheese disc. Our menu focuses on wild sophistication. Using local produce cooked in wild earth barrel cookers matched expertly to our wines. We like to promote the whole experience of food and wine matching. We break down the flavours in each vintage of wine and create dishes to match. This dish was created to match the Wild Earth Pinot Noir 2010. The bold flavours showing through in this hot vintage are offset by the spice, while the ripe fruit flavours compliment the depth of flavour in the rump","sff-lamb"],
 						["The Kensington","James","Blair","Head Chef","4 King Edwards Street","South Dunedin","Dunedin","03 477 2227","Lamb Rump","Main","Silver Fern Farms Lamb Rump","A reflection of traditional kiwi lamb. Roasted medium rare with balsamic glazed baby vegetables, potato rosti and rich rosemary red wine jus - simple and superb done well.","sff-lamb"],
 						["Salt","Callan","Lloyd","Head Chef","240 Forbury Street","St Clair","Dunedin","03 455 1077","Beef Fillet","Main","Silver Fern Farms Fillet Tenderloin of Beef","Beef fillet served on a creamy potato gratin with a marinated portobello mushroom, wilted greens and finished with a green peppercorn jus","sff-beef"],
-						["Luna Bar and Restaurant","Karl","Toth","Head Chef/Owner","314 Highgate","Roslyn","Dunedin","027 775 98083","SFF Lamb Rump","Main","Silver Fern Farms Lamb Rump with cap off","I wanted to put a lamb dish on the menu for the new season that was lighter than the winter shank and add some Moroccan flavours without overpowering the lamb","sff-lamb"],
-						["Robbie’s Bar and Bistro ","George","Melrose","Head Chef","Corner of MacAndrew Road and King Edward Street","","Dunedin","03 455 2802","Pacific Bowl","Main","Silver Fern Farms Beef Fillet","My Beef Fillet wife, fillet steak on seina, pakora vegetables, raita, tamarind, nasturtiun garnisa","sff-beef"],
+						["Luna Bar and Restaurant","Karl","Toth","Head Chef/Owner","314 Highgate","Roslyn","Dunedin","03 477 2227","Silver Fern Farms Lamb Rump","Main","Silver Fern Farms Lamb Rump with cap off","I wanted to put a lamb dish on the menu for the new season that was lighter than the winter shank and add some Moroccan flavours without overpowering the lamb","sff-lamb"],
+						["Robbies Bar and Bistro ","George","Melrose","Head Chef","Corner of MacAndrew Road and King Edward Street","","Dunedin","03 455 2802","Pacific Bowl","Main","Silver Fern Farms Beef Fillet","Fillet steak on seina, pakora vegetables, raita, tamarind, nasturtium garnisa","sff-beef"],
 						["Two Chefs Bistro","Helen","Manson","Chef/Owner","121 Stuart Street","","Dunedin","03 477 7293","Smoked Silere Merino cutlet","Main","Silere Alpine Origin Merino Lamb Rack and Silere Alpine Origin Merino Lamb Rump","Smoked Silere Merino cutlet and roasted lamb rump, baked harissa eggplant, pomegranate jewels, potato and feta fritters. The dish was inspired by the purchase of a digitally controlled smoker and the discovery of silere merino being a meat with enough fat content to stay beautifully tender after smoking, then matched with flavours of Morocco. ","silere"],
 						["Bacchus ","Rosalie","Lock","Head Chef","12 The Octagon","","Dunedin","03 474 0824","Oven Baked Lamb Rump","Main","Silver Fern Farms Lamb Rump","Silver Fern Farms Lamb Rump, oven baked with a mint pesto crust on a Mediterranean salad with caponata and jus","sff-lamb"],
 						["Delicacy","Alison","Lambert","Chef/Owner","Highgate","Maori Hill ","Dunedin","03 464 0700","Morrocan spiced venison,","Warm Salad","Cervena Venison Loin","Seasonal, local produce with a hint of morocco. Morrocan spiced venison, whole wheat, roasted beetroot and wild rocket salad with pomegranate","cervena-venison"],
-						["Coast Restaurant","Richard ","Collins","Chef","Beach Road","","Kakanui","03 439 5969","Beef reserve","Main","Reserve Rib Eye and Scotch Fillet Beef","Reserve Rib Eye and Scotch fillet cooked to order with seasonal vegetables, potato rosti and housemade garlic chilli butter","reserve"],
+						["Coast Restaurant","Richard ","Collins","Chef","Beach Road","","Kakanui","03 439 5969","Reserve Beef","Main","Reserve Beef and Scotch Fillet","Reserve Rib Eye and Scotch fillet cooked to order with seasonal vegetables, potato rosti and housemade garlic chilli butter","reserve"],
 						["Northstar Restaurant ","Pablo","Tacchini","Head Chef","495A Thames Highway","","Oamaru","03 437 1190 ","Pan seared Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Pan seared lamb rump with cous cous salad, grilled asparagus and minted cuolla sauce. Argentinian cuisine","silere"],
-						["Hillary’s","Shinji","Kurihara","Sous Chef","88 Frankton Road","","Queenstown","03 442 7950","Beef Katsu with Sesame Miso Sauce","Main","Silver Fern Farms Beef ","Beef cotelette (crumbed Beef Japanese style) sesame and miso sauce, served with potato and broad bean salad","sff-beef"],
+						["Hillarys","Shinji","Kurihara","Sous Chef","88 Frankton Road","","Queenstown","03 442 7950","Beef Katsu with Sesame Miso Sauce","Main","Silver Fern Farms Beef ","Beef cotelette (crumbed Beef Japanese style) sesame and miso sauce, served with potato and broad bean salad","sff-beef"],
 						["The Bunker ","Liam","Deasy","Head Chef","Cow Lane","","Queenstown","03 441 8030","Reserve Rib eye and short Rib","Main","Reserve Beef Rib Eye and Reserve Beef Short Rib","Classic beef compliments with a refined twist. Roasted Silver Fern Farms reserve rib eye, slow braised short rib with a bone marrow gratin, smoked tomato mousse, fried onion puree and wild mushrooms two ways","reserve"],
 						["Impressions, Copthorne Lakefront","Jonny","Coulter","Head Chef","Copthorne Hotel and Resort Lakefront","Corner Frankton and Adelaide Roads","Queenstown","03 450 0260","NZ Spring Lamb","Main","Silere Alpine Origin Merino Lamb Rump","Pistachio crusted lamb rump served with manuka smoked kumara mash, baby spring vegetables drizzled with a rosemary jusette. Inspiration is 'Spring Time'","silere"],
-						["Gantleys ","Craig ","Hendry","Head Chef","172 Arthurs point Road ","","Queenstown","03 442 8999","Hereford Beef Fillet with braised beef rib","Main","Hereford Beef Fillet and Rib","Braised beef rib and beef fillet, blue cheese beinget , pan jus and seasonal vegetables","hereford"],
-						["Lombardi Restaurant at St Moritz ","Emiliano","Comerso","Sous Chef","10-18 Brunswick Street","","Queenstown","03 442 4990","Lamb","Main","Silere Alpine Origin Merino Lamb Whole Leg","We wanted to give full flavour of lamb, to have the whole experience so we have been researching all the different cuts of the animal, from nose to tail, and the different cooking methods, and after a long research, we came up with this dish, it's a mix of New Zealand tradition and new world memories","silere"],
+						["Gantleys ","Craig ","Hendry","Head Chef","172 Arthurs point Road ","","Queenstown","03 442 8999","Hereford Beef Fillet with braised beef rib","Main","Hereford Beef Fillet and Rib","Braised beef rib and beef fillet, blue cheese beignet, pan jus and seasonal vegetables","hereford"],
+						["Lombardi Restaurant at St Moritz ","Emiliano","Comerso","Sous Chef","10-18 Brunswick Street","","Queenstown","03 442 4990","Lamb","Main","Silere Alpine Origin Merino","We wanted to give full flavour of lamb, to have the whole experience so we have been researching all the different cuts of the animal, from nose to tail, and the different cooking methods, and after a long research, we came up with this dish, it's a mix of New Zealand tradition and new world memories","silere"],
 						["Lombardi Restaurant at St Moritz ","Martin","Zaiden","Chef de partie","10-18 Brunswick Street","","Queenstown","03 442 4990","Otago Beef Fillet","Main","Reserve Beef Fillet","We are located in Otago region, the soil here has the same sweet flavours (that can be reflected in the great Pinot Noir and Riesling from this region) the grass that the animal eats has the same sweet flavours, because of that we came up with this dish","reserve"],
-						["Wakatipu Grill ","Frederic","Monnies","Exec Chef","Hilton Queenstown","79 Peninsula road","Queenstown","03 450 9438","Silere Merino Lamb shoulder, slow cooked, minted pea puree, vintage goats feta, baby carrots and potato","Main","Silere Alpine Origin Merino Lamb oyster shoulder","Inspiration came as taking the idea of roast lamb, and turn it into something more modern","silere"],
+						["Wakatipu Grill ","Frederic","Monnier","Exec Chef","Hilton Queenstown","79 Peninsula road","Queenstown","03 450 9438","Silere Merino Lamb shoulder, slow cooked, minted pea puree, vintage goats feta, baby carrots and potato","Main","Silere Alpine Origin Merino Lamb oyster shoulder","Inspiration came as taking the idea of roast lamb, and turn it into something more modern","silere"],
 						["Observatory at Millenium","Sally","King","Junior sous chef","32 Frankton Road","PO Box 551","Queenstown","03 422 3418","Lamb Shank Wellington","Main","Silver Fern Farms Lamb Shank","Slow braised and de-boned lamb shank, encased in rosemary infused mushroom duxelle and crisp puff pastry. Served with roasted kumara and pumpkin puree and seasonal greens","sff-lamb"],
 						["Amisfield","Jay ","Sherwood","Chef","10 Lake Hayes Road","RD1","Queenstown","03 442 0556","Grilled Beef Rump, charred cauliflower, pickled onion, chimmichur and oregano","Main","Reserve Beef Rump","I was inspired by spring. I wanted to use rump because of the amazing flavour. The grilled flavour of the meat pairs with charred flavour of the cauliflower and onion and the chimmichurr brings it all together with the strong flavour of fresh herbs","reserve"],
-						["Panorama Restaurant","Kane","Bambery","Exec Chef","89 Terrace Road","Aoraki/Mt Cook","South Canterbury","03 435 1809","Times have changed","Entrée","Silere Alpine Origin Merino Lamb Loin","Horopito rubbed lamb rump seared and baked to medium rare served on a roasted beetroot charred green bean and toasted almond salad topped in creamy feta and berry vinaigrette","silere"],
 						["Starfish","Keri/Levi","","Chef","7/240 Forbury Road","","St Clair, Dunedin","03 455 5940","Horopito rubbed Alpine Merino","Entrée/Salad","Silere Alpine Origin Merino Lamb Rump","Horopito rubbed lamb rump seared and baked to medium rare served on a roasted beetroot charred green bean and toasted almond salad topped in creamy feta and berry vinegarette","silere"],
 						["Pier 24","Greg","Piner","Head Chef","Hotel St Clair","24 The Esplanade","St Clair, Dunedin","03 456 0555","Grilled Venison Loin","Main","Cervena Venison Loin Fillet","Chargrilled venison loin, green pepper corn and sage pesto, leek and black pudding tart, glazed beetroot, blood orange jus","cervena-venison"],
-						["Mckinnon Room Restaurant ","Ken","O'Connell","Group Executive Chef","Distinction Hotel and Villas","64 Lakefront Drive","Te Anau ","03 2499 700","Fillet of Venison","Main","Silver Fern Farms Venison Fillet and Cheek","Fillet of venison, braised cheek and venison ham croquette, juniper poached pear celeriac and baby carrots, potato puree in brick pastry and a venison jus","sff-venison"]
+						["Mckinnon Room Restaurant","Ken","O'Connell","Group Executive Chef","Distinction Hotel and Villas","64 Lakefront Drive","Te Anau ","03 2499 700","Fillet of Venison","Main","Silver Fern Farms Venison Fillet and Cheek","Fillet of venison, braised cheek and venison ham croquette, juniper poached pear celeriac and baby carrots, potato puree in brick pastry and a venison jus","sff-venison"]
 					]
 				} // end of lower-south obj
 			] // end of dat obj
@@ -165,7 +172,7 @@ $(document).ready(function(){
 
 			var $ltIe9 = $('html').hasClass('lt-ie9');
 
-			console.log('$ltIe9 = ' + $ltIe9);
+			//console.log('$ltIe9 = ' + $ltIe9);
 
 			return $ltIe9;
 
@@ -177,7 +184,7 @@ $(document).ready(function(){
 
 				touch : function(){
 
-					console.log('testing for touch...');
+					//console.log('testing for touch...');
 
 					$('body')
 						.on('touchstart.usingTouch', function(){ // if the body is effected by a touch then do not execute the dynamic mouse scrolling from the 'mousemove' function on the $chfCon...
@@ -190,7 +197,7 @@ $(document).ready(function(){
 
 				mouse : function(){
 
-					console.log('adding mouse listener...');
+					//console.log('adding mouse listener...');
 
 					$('body')
 						.on('mousemove.usingMouse', function(){ // if the body is effected via ouse then execute the dynamic mouse scrolling from the 'mousemove' function on the $chfCon...
@@ -207,29 +214,32 @@ $(document).ready(function(){
 
 				touch : function(){
 
-					console.log('testing for touch...');
+					//console.log('testing for touch...');
+
+					var $chfCon = $('.chef-container');
 
 					$m.s.touch = true;
 
-					$('.chef-container')
+					$chfCon
 						.find('.scroll-container')
 						.css({'overflow-x' : 'scroll'}); // ...and set the scroll container to scroll in the x-axis so that the content can be panned with a finger and clicking on a li will not jump the ul to the dynamic scroll location
 					
-					//$sld
-					//	.find('.slider-controls')
-					//	.css({'display' : 'none'});
+					$chfCon
+						.find('.scroll')
+						.css({'pointer-events' : 'auto'});
 
 					$('body').off('.usingTouch');
 
 					$m.inputType.listeners.mouse();
 
-					console.log('touch = ' + $m.s.touch);
 
 				}, // end of touch obj
 
 				mouse : function(){
 
-					console.log('change to mouse UI...');
+					//console.log('change to mouse UI...');
+
+					var $chfCon = $('.chef-container');
 
 					$m.s.touch = false;
 
@@ -237,17 +247,13 @@ $(document).ready(function(){
 						.find('.scroll-container')
 						.css({'overflow-x' : 'hidden'}); // ...and set the scroll container to scroll in the x-axis so that the content can be panned with a finger and clicking on a li will not jump the ul to the dynamic scroll location
 					
-					//$sld
-					//	.find('.slider-controls')
-					//	.css({'display' : 'block'});
-
-					//$('body').css({'background-color' : 'red'});
+					$chfCon
+						.find('.scroll')
+						.css({'pointer-events' : 'none'});
 
 					$('body').off('.usingMouse');
 
 					$m.inputType.listeners.touch();
-
-					console.log('touch = ' + $m.s.touch);
 
 				} // end of mouse obj
 
@@ -269,7 +275,7 @@ $(document).ready(function(){
 					$mc = $('.map-container'), // reference the map container DOM element...
 					$rm = $mc.find('.region-map'), // from the above DOM reference find the region map -> this will be used to select all map shapes / the active shape and the over shape...
 					$rl = $mc.find('.region-list'), // from the above DOM reference find the region list -> this will be used to select all li / the active li and the over li...
-					$si = $mc.find('.slider-images'), // from the above DOM reference find the slider images div -> this will be used to tween the bg image on region mouseenter...
+					//$si = $mc.find('.slider-images'), // from the above DOM reference find the slider images div -> this will be used to tween the bg image on region mouseenter...
 					$ani = $m.s.ani,
 					$i, $path, $map, $li, $lnd; // nulls that will be filled in later
 
@@ -282,8 +288,8 @@ $(document).ready(function(){
 					$lnd = $rm.find('.land-mass').find($('li[data-num="' + $i + '"]')); // find the current land mass
 
 					// run the listeners for the map and list element for the region in the current loop state
-					$m.regions.listeners.map($map, $rm, $rl, $li, $lnd, $i, $ani, $si); // Raphael listeners...
-					$m.regions.listeners.list($rm, $rl, $li, $lnd, $i, $ani, $si); // jQuery listeners...
+					$m.regions.listeners.map($map, $rm, $rl, $li, $lnd, $i, $ani); // Raphael listeners...
+					$m.regions.listeners.list($rm, $rl, $li, $lnd, $i, $ani); // jQuery listeners...
 
 				} // end of for loop
 
@@ -291,7 +297,7 @@ $(document).ready(function(){
 
 			listeners : {
 
-				map : function($map, $rm, $rl, $li, $lnd, $i, $ani, $si){
+				map : function($map, $rm, $rl, $li, $lnd, $i, $ani){
 
 					$map.node.onclick = function(){ // set the Raphael on click event...
 
@@ -301,7 +307,7 @@ $(document).ready(function(){
 
 					$map.node.onmouseover = function(){ // set the Raphael on mouseover event...
 
-						$m.regions.actions.onmouseenter($rm, $rl, $li, $i, $lnd, $ani, $si);
+						$m.regions.actions.onmouseenter($rm, $rl, $li, $i, $lnd, $ani);
 
 					};
 
@@ -313,7 +319,7 @@ $(document).ready(function(){
 
 				}, // end of map fnc
 
-				list : function($rm, $rl, $li, $lnd, $i, $ani, $si){
+				list : function($rm, $rl, $li, $lnd, $i, $ani){
 
 					$li.on('click', function(){
 
@@ -321,7 +327,7 @@ $(document).ready(function(){
 
 					}).on('mouseenter', function(){
 
-						$m.regions.actions.onmouseenter($rm, $rl, $li, $i, $lnd, $ani, $si);
+						$m.regions.actions.onmouseenter($rm, $rl, $li, $i, $lnd, $ani);
 
 					}).on('mouseleave', function(){
 
@@ -364,7 +370,7 @@ $(document).ready(function(){
 
 				}, // end of onclick
 
-				onmouseenter : function($rm, $rl, $li, $i, $lnd, $ani, $si){
+				onmouseenter : function($rm, $rl, $li, $i, $lnd, $ani){
 
 					// set DORMANT states...
 					//TweenMax.to($rm.find('li'), $ani, {'opacity' : '0'}); // ALL land masses are faded out
@@ -376,7 +382,7 @@ $(document).ready(function(){
 					$lnd.stop().animate({'opacity' : '1'}, 250); // using jQuery animate instead of the TweenMax code above as it would not work with IE8
 					TweenMax.to($li, $ani, {'color' : $m.s.col.medBrown}); // current list item set to brown
 
-					TweenMax.to($si, ($ani * 5), {'left' : ($i * -900)+ 'px'});
+					//TweenMax.to($si, ($ani * 5), {'left' : ($i * -900)+ 'px'});
 
 					$('body').css({'cursor' : 'pointer'}); // change the cursor to pointer (makes the land mass svg / vml elements seem un-block like)
 
@@ -422,7 +428,7 @@ $(document).ready(function(){
 				var $wth = 0, // the ul width that will be the exact length to hold all of the created chef li's...
 					$li  = '', // shell for housing the list data
 					$ani = $m.s.ani,
-					$j, $dat, $regLen, $chfLen, $ran, $ul; // nulls to populate later
+					$j, $dat, $regLen, $chfLen, $ran, $ul, $srlCon; // nulls to populate later
 				
 				if(isNaN($i)){ // if $i has not been defined then this is the first time that the chefs are being populated... in that regard chefs ALL regions will reside inside the ul via random population
 
@@ -437,12 +443,20 @@ $(document).ready(function(){
 				if($ran){ // if $i has not been defined then this is the first time that the chefs are being populated... in that regard chefs ALL regions will reside inside the ul
 					
 					$i = 0; // set $i to zero as chefs in ALL regions will be displayed
+					
 					$regLen = $m.s.dat.length; // set the region loop length to be = to the anount of regions in the data set
 
 				}else{ // if $i has been defined then we will populate teh chefs from the used selected region... $i will = the region array reference with the loop length being $i + 1 so that it will run only once
 
 					$chfCon = $('.chef-container'); // set the DOM reference as it will not be pulled though from the init()
+					
 					$regLen = $i + 1; // set the region loop length to run the loop only ONCE!
+					
+					$('.map-container')
+						.find('.modal')
+						.find('.buttons')
+						.find('.direction')
+						.css({'display' : 'block'});
 
 				} // end of if statement
 
@@ -531,7 +545,23 @@ $(document).ready(function(){
 				$ul.css({'width' : $wth + 'px'}) // set the length of the ul to match the number of li taht it will house
 					.html($li); // add in the $li content generated from the for loop
 
-				TweenMax.to($chfCon.find('.scroll-container'), ($ani * 5), {'scrollLeft' : 235});
+				if(!$ran){ // if this is not the fist chef population then we need to tween the scroll container back into place as well as face in the chef entries into view
+
+					$srlCon = $chfCon.find('.scroll-container');
+
+					//TweenMax.to($srlCon, ($ani * 5), {'scrollLeft' : 235}); // send the scroll container back to the start of the list (leaving a bit of padding as per usual)
+
+					TweenMax.set($srlCon, {'scrollLeft' : '-235'});
+
+					for($i = 0; $i < 3; $i++){ // loop through the first three chef entries and fade them into view (stops the harsh append transition - as it sometimes looks like the content has not been repopulated with the new region data)
+
+						TweenMax.from($srlCon.find($('li[data-chef="' + $i + '"]')), $ani, {'opacity' : '0', 'delay' : ($ani / 2 * $i)}); // fade in from 0% to 100% opacity - adding in a slight delay that is half the animation length to get a slight stagnation effect
+
+					} // end of for loop
+
+				} // end of if statement
+
+				$m.s.modal.chfLen = $chfLen; // add the chef length to the modal object for future reference (using the left and right buttons on the modal UI)
 
 			}, // end of popChef fnc
 
@@ -665,54 +695,16 @@ $(document).ready(function(){
 
 					onclick : function($this, $ani){
 
-						var $reg   = $this.attr('data-region'),
-							$chf   = $this.attr('data-chef'),
-							$dat   = $m.s.dat[$reg].chefs[$chf],
-							$mod   = $('.modal'),
-							$html;
+						var $reg = $this.attr('data-region'),
+							$chf = $this.attr('data-chef'),
+							$mod = $('.modal');
 
-						console.log('modal logo = ' + $dat[12]);
+						$m.s.modal.reg = $reg; // add the region reference to the modal object (for using the left and right buttons on the modal UI)
+						$m.s.modal.chf = $chf; // add the chef reference to the modal object (for using the left and right buttons on the modal UI)
 
-						$html = '<div class="image" data-sprite="' + $dat[12] + '"></div>' +
-								//'<div class="image" style="background-position:' + $bgPos + 'px 0px"></div>' +
-								'<h2>' + $dat[8] + '<span class="course">';
+						$mod.find('.data').html($m.modal.populate($reg, $chf));
 
-						if($dat[9] !== ''){ // if there is A COURSE stipulated in the entry data...
-
-							$html += ' (' + $dat[9] + ')</span></h2>';
-
-						}else{ // if there is NO COURSE stipulated in the entry data...
-
-							$html += '</h2>';
-
-						} // end of if statement
-								
-						$html += '<h3>Cut Used</h3>' +
-								'<div>' + $dat[10] + '</div>';
-
-						if($dat[11] !== ''){ // if there is NO DESCRIPTION stipulated in the entry data...
-
-							$html += '<h3>Dish Description</h3>' +
-									'<div>' + $dat[11] + '</div>';
-
-						} // end of if statement
-
-						$html += '<h3>Entrant Name</h3>' +
-								'<div>' + $dat[1] + ' ' + $dat[2] + ' ' + '<span class="title">' + $dat[3] + '</span>' + '</div>' +
-								'<h3>Restaurant</h3>' +
-								'<ul>' +
-									'<li class="break name">' + $dat[0] + '</li>' +
-									'<li class="bullet break extra-address">' +
-										'<ul>' +
-											'<li>' + $dat[4] + '</li>' +
-											'<li>' + $dat[5] + '</li>' +
-											'<li>' + $dat[6] + '</li>' +
-										'</ul>' +
-									'</li>' +
-									'<li class="bullet">Ph: ' + $dat[7] + '</li>' +
-								'</ul>';
-
-						$mod.find('.data').html($html);
+						$m.modal.actions.rndBtn.state($chf, $m.s.modal.chfLen); // modify the states of the left and right buttons to active / inactive if need be
 
 						$mod.css({'display' : 'block'});
 						TweenMax.to($mod, $ani, {'opacity' : '1'});
@@ -790,8 +782,6 @@ $(document).ready(function(){
 
 								$curSeg--;
 
-								console.log('minus to the left');
-
 							} // end of if statement
 
 						}else{
@@ -800,13 +790,9 @@ $(document).ready(function(){
 
 								$curSeg++;
 
-								console.log('add to the right');
-
 							} // end of if statement
 
 						} // end of if statement
-
-						console.log('$curSeg = ' + $curSeg);
 
 						TweenMax.to($scrlCon, ($ani * 5), {'scrollLeft' : ($curSeg * 235)});
 
@@ -825,13 +811,13 @@ $(document).ready(function(){
 
 						if($dir === 'left'){
 
-							console.log('***LEFT***');
+							//console.log('***LEFT***');
 
 							TweenMax.to($scrlCon, $ani, {'scrollLeft' : '-=235'});
 
 						}else{
 
-							console.log('***RIGHT***');
+							//console.log('***RIGHT***');
 
 							TweenMax.to($scrlCon, $ani, {'scrollLeft' : '+=240'});
 
@@ -859,20 +845,42 @@ $(document).ready(function(){
 
 				var $ani = $m.s.ani;
 
-				$mod.find('.close')
-					.on('click', function(){
-
-						$m.modal.actions.close.onclick($(this), $mod, $ani);
-
-					})
+				$mod.find('.rnd-btn')
 					.on('mouseenter', function(){
 
-						$m.modal.actions.close.onmouseenter($(this), $ani);
+						$m.modal.actions.rndBtn.onmouseenter($(this), $ani);
 
 					})
 					.on('mouseleave', function(){
 
-						$m.modal.actions.close.onmouseleave($(this), $ani);
+						$m.modal.actions.rndBtn.onmouseleave($(this), $ani);
+
+					});
+
+				// -----
+
+				$mod.find('.close')
+					.on('click', function(){
+
+						$m.modal.actions.closeBtn.onclick($(this), $mod, $ani);
+
+					});
+
+				// -----
+
+				$mod.find('.left')
+					.on('click', function(){
+
+						$m.modal.actions.leftBtn.onclick($mod, $ani);
+
+					});
+
+				// -----
+
+				$mod.find('.right')
+					.on('click', function(){
+
+						$m.modal.actions.rightBtn.onclick($mod, $ani);
 
 					});
 
@@ -880,19 +888,7 @@ $(document).ready(function(){
 
 			actions : {
 
-				close : {
-
-					onclick : function($this, $mod, $ani){
-
-						TweenMax.to($mod, $ani, {'opacity' : '0', onComplete : clickComplete});
-
-						function clickComplete(){
-
-							$mod.css({'display' : 'none'});
-
-						} // end of clickComplete fnc
-
-					}, // end of onclick fnc
+				rndBtn : {
 
 					onmouseenter : function($this, $ani){
 
@@ -942,11 +938,171 @@ $(document).ready(function(){
 
 						} // end of if statement*/
 
-					} // end of onmouseleave fnc
+					}, // end of onmouseleave fnc
 
-				} // end of close obj
+					state : function($chf, $chflen){
+
+						var $btns = $('.map-container').find('.modal').find('.buttons'),
+							$left = $btns.find('.left'), // get left button
+							$right = $btns.find('.right');// get right button
+
+						if($chf <= 0){
+
+							$left.css({'opacity' : '0.25'}); // change to inactive
+							$right.css({'opacity' : '1'}); // change to active
+
+						}else if($chf >= ($chflen - 1)){
+
+							$left.css({'opacity' : '1'}); // change to active
+							$right.css({'opacity' : '0.25'}); // change to inactive
+
+						}else{
+
+							$left.css({'opacity' : '1'}); // change to active
+							$right.css({'opacity' : '1'}); // change to active
+
+						} // end of if statement
+
+					} // end of state fnc
+
+				}, // end of rndBtn obj
+
+				closeBtn : {
+
+					onclick : function($this, $mod, $ani){
+
+						TweenMax.to($mod, $ani, {'opacity' : '0', onComplete : clickComplete});
+
+						function clickComplete(){
+
+							$mod.css({'display' : 'none'});
+
+						} // end of clickComplete fnc
+
+					}, // end of onclick fnc
+
+				}, // end of close obj
+
+				leftBtn : {
+
+					onclick : function($mod, $ani){
+
+						var	$reg = $m.s.modal.reg, // get the region reference from the modal object
+							$chf = $m.s.modal.chf, // get the chef reference from the modal object
+							$modDat = $mod.find('.data');
+
+						if($chf <= 0){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+
+							return '';
+
+						} // end of if statement
+
+						$chf--; // add one onto the chef reference to get new value
+
+						$m.s.modal.chf = $chf; // store that new value back into the modal object
+
+						TweenMax.to($modDat, $ani, {'left' : '-20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the left
+
+						function clickComplete(){
+
+							$modDat.html($m.modal.populate($reg, $chf)); // populate the modal data
+
+							TweenMax.set($modDat, {'left' : '20px'}); // set the new content off to the right
+							TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the right
+
+						} // end of clickComplete fnc
+
+						$m.modal.actions.rndBtn.state($chf); // modify the states of the left and right buttons to active / inactive if need be
+
+					} // end of onclick fnc
+
+				}, // end of left obj
+
+				rightBtn : {
+
+					onclick : function($mod, $ani){
+
+						var	$reg = $m.s.modal.reg, // get the region reference from the modal object
+							$chf = $m.s.modal.chf, // get the chef reference from the modal object
+							$chflen = $m.s.modal.chfLen, // get the chef length reference from the modal object
+							$modDat = $mod.find('.data');
+
+						if($chf >= ($chflen - 1)){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+
+							return '';
+
+						} // end of if statement
+
+						$chf++; // add one onto the chef reference to get new value
+
+						$m.s.modal.chf = $chf; // store that new value back into the modal object
+
+						TweenMax.to($modDat, $ani, {'left' : '20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the right
+
+						function clickComplete(){
+
+							$modDat.html($m.modal.populate($reg, $chf)); // populate the modal data
+
+							TweenMax.set($modDat, {'left' : '-20px'}); // set the new content off to the left
+							TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the left
+
+						} // end of clickComplete fnc
+
+						$m.modal.actions.rndBtn.state($chf, $chflen); // modify the states of the left and right buttons to active / inactive if need be
+
+					} // end of onclick fnc
+
+				}, // end of right obj	
 			
-			} // end of actions obj
+			}, // end of actions obj
+
+			populate : function($reg, $chf){
+
+				var $dat = $m.s.dat[$reg].chefs[$chf],
+					$html;
+
+				$html = '<div class="image" data-sprite="' + $dat[12] + '"></div>' +
+						//'<div class="image" style="background-position:' + $bgPos + 'px 0px"></div>' +
+						'<h2>' + $dat[8];
+
+				if($dat[9] !== ''){ // if there is A COURSE stipulated in the entry data...
+
+					$html += ' <span class="course">(' + $dat[9] + ')</span></h2>';
+
+				}else{ // if there is NO COURSE stipulated in the entry data...
+
+					$html += '</h2>';
+
+				} // end of if statement
+						
+				$html += '<h3>Cut Used</h3>' +
+						'<div>' + $dat[10] + '</div>';
+
+				if($dat[11] !== ''){ // if there is NO DESCRIPTION stipulated in the entry data...
+
+					$html += '<h3>Dish Description</h3>' +
+							'<div>' + $dat[11] + '</div>';
+
+				} // end of if statement
+
+				$html += '<h3>Entrant Name</h3>' +
+						'<div>' + $dat[1] + ' ' + $dat[2] + ' ' + '<span class="title">(' + $dat[3] + ')</span>' + '</div>' +
+						'<h3>Restaurant</h3>' +
+						'<ul>' +
+							'<li class="break name">' + $dat[0] + '</li>' +
+							'<li class="bullet break extra-address">' +
+								'<ul>' +
+									'<li>' + $dat[4] + '</li>' +
+									'<li>' + $dat[5] + '</li>' +
+									'<li>' + $dat[6] + '</li>' +
+								'</ul>' +
+							'</li>' +
+							'<li class="bullet">Ph: ' + $dat[7] + '</li>' +
+						'</ul>';
+
+				return $html;
+
+			} // end of populate fnc
 		
 		}, // end of modal obj
 
