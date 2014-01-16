@@ -107,6 +107,22 @@ h4{
 	padding: 0;
 }
 
+h5{
+	color: $medGray;
+	font: {
+		family: "Economica", arial, sans-serif;
+		weight: 400;
+		size: 70px;
+		style: normal;
+	}
+	margin: 0;
+	padding: 0;
+	text: {
+		align: center;
+		transform:uppercase;
+	}
+}
+
 .sff-wrapper{
 	position: relative;
 	width: 940px;
@@ -132,16 +148,45 @@ h4{
 	}*/
 }
 
+.underline{
+	border-bottom: 1px solid $drkGray;
+	//margin: 0 $padB 0 $padB;
+}
+
+.expanded-intro{
+	font: {
+		family: "Economica", arial, sans-serif;
+		weight: 400;
+		size: 20px;
+		style: normal;
+	}
+	//margin: 0 $padB 0 $padB;
+	text: {
+		align: center;
+		transform:uppercase
+	}
+}
+
+.bold-cta{
+	color: $medGray;
+	font: {
+		weight: 900;
+		size: 18px;
+	}
+	padding: 0 0 $padS 0;
+	text-align: center;
+}
+
 .intro{
 	position: relative;
-	padding: 450px $padB ($padB - 20px) $padB;
+	padding: 250px $padB ($padB - 20px) $padB;
 	background: {
 		image: url(../img/generic-sprite.jpg);
 		repeat: no-repeat;
-		position: 0 -765px;
+		position: 0 -1265px;
 	}
 
-	&:before{
+	/*&:before{
 		@include pseudo;
 		top: 325px;
 		left: 0;
@@ -150,9 +195,9 @@ h4{
 		background: {
 			image: url(../img/generic-sprite.jpg);
 			repeat: no-repeat;
-			position: 0 -625px;
+			position: 0 -1125px;
 		}
-	}
+	}*/
 
 	&:after{
 		@include pseudo;
@@ -168,6 +213,11 @@ h4{
 	}
 }
 
+.intro-container{
+	width: 840px;
+	margin: 0 $padB 0 $padB;
+}
+
 .vert-divider{
 	position: absolute;
 	width: 1px !important;
@@ -181,7 +231,6 @@ ul.description{
 	list-style-type: none;
 	margin: $padB 0 0 0;
 	padding: 0;
-	border-bottom: 1px solid $drkGray;
 	font-size: 14px;
 
 	li{
@@ -207,23 +256,195 @@ ul.call-to-action{
 	padding: $padS 0 0 0;
 	text-align: center;
 	color: $medGray;
+}
 
-	li.top{
-		font: {
-			family: "Economica", arial, sans-serif;
-			weight: 400;
-			size: 20px;
-			style: normal;
-		}
-		text-transform:uppercase;
+.feature-image{
+	//cursor: pointer;
+	background: {
+		image: url(../img/generic-sprite.jpg);
+		repeat: no-repeat;
+		position: 0 -560px;
+	}
+	height: 200px;
+	margin: $padS $padB $padB $padB;
+	position: relative;
+	width: 840px;
+
+	&:after{
+		@include pseudo;
+		width: 100%;
+		height: 20px;
+		top: 100%;
+		left: 0;
+		background: {
+			image: url(../img/transparent-sprite.png);
+			repeat: no-repeat;
+			position: 0 -185px;
+		}		
 	}
 
-	li.bottom{
-		font: {
-			weight: 900;
-			size: 18px;
+	.clip-container{
+		//display: none;
+		position: absolute;
+		overflow: hidden;
+		width: 840px;
+		height: 200px;
+		left: 0;
+		top: 0;
+
+		.logo-snippet{
+			position: absolute;
+			background: {
+				image: url(../img/generic-sprite.jpg);
+				repeat: no-repeat;
+			}
+
+			&.snippet0{
+				background-position: 0 (0 - 350px);
+				left: -117px;
+				top: 0;
+				width: 117px;
+				height: 200px;
+			}
+
+			&.snippet1{
+				background-position: -117px (0 - 350px);
+				left: 117px;
+				top: -70px;
+				width: 173px;
+				height: 70px;
+			}
+
+			&.snippet2{
+				background-position: -117px (-70px - 350px);
+				left: 117px;
+				top: 70px + 130px;
+				width: 173px;
+				height: 130px;
+			}
+
+			&.snippet3{
+				background-position: -290px (0 - 350px);
+				left: 290px;
+				top: -100px;
+				width: 100px;
+				height: 100px;
+			}
+
+			&.snippet4{
+				background-position: -290px (-100px - 350px);
+				left: 290px;
+				top: 100px + 100px;
+				width: 200px;
+				height: 100px;
+			}
+
+			&.snippet5{
+				background-position: -390px (0 - 350px);
+				left: 390px;
+				top: -100px;
+				width: 100px;
+				height: 100px;
+			}
+
+			&.snippet6{
+				background-position: -490px (0 - 350px);
+				left: 490px;
+				top: 200px;
+				width: 200px;
+				height: 200px;
+			}
+
+			&.snippet7{
+				background-position: -690px (0 - 350px);
+				left: 690px + 150px;
+				top: 0;
+				width: 150px;
+				height: 150px;
+			}
+
+			&.snippet8{
+				background-position: -690px (-150px - 350px);
+				left: 690px;
+				top: 150px + 50px;
+				width: 150px;
+				height: 50px;
+			}
 		}
-		padding: $padS 0 0 0;
+	}
+}
+
+ul.finalists-container{
+	font-size: 14px;
+	list-style-type: none;
+	margin: 0 0 $padS 0;
+	padding: 0 $padB 0 $padB;
+
+	li.nominee{
+		display: inline-block;
+		cursor: pointer;
+		padding: $padS $padS $padS (80px + $padS);
+		position: relative;
+		width: 50%;
+
+		.image{
+			z-index: 1;
+			background: {
+				image: url(../img/finalists-sprite-small.jpg);
+				repeat: no-repeat;
+			};
+			height: 80px;
+			left: 0;
+			position: absolute;
+			top: $padS;
+			width: 80px;
+			@include box-shadow(0 5px 10px 0 $lytGray);
+		}
+
+		.shadow{
+			z-index: 0;
+			position: absolute;
+			left: 0;
+			top: 100px;
+			background: {
+				image: url(../img/generic-sprite.jpg);
+				repeat: no-repeat;
+				position: -54px -1090px;
+			}
+			width: 80px;
+			height: 20px;
+			@include opacity(0.5);
+		}
+
+		.copy-block{
+			height: 100px;
+			overflow: hidden;
+			position: relative;
+
+			h3.restaurant{
+				color: $medBrown;
+				font-size: 16px;
+				margin: 0 0 $padS / 2 0;
+			}
+
+			.gradient{
+				position: absolute;
+				bottom: 0;
+				height: $padB;
+				left: 0;
+				width: 100%;
+				@include background-image(linear-gradient(bottom, white, rgba(white, 0)));
+			}
+
+			/*&:after{
+				@include pseudo;
+				bottom: 0;
+				height: $padB;
+				left: 0;
+				width: 100%;
+				@include background-image(linear-gradient(bottom, white, rgba(white, 0)));
+			}*/
+		}
 	}
 }
 
@@ -231,7 +452,6 @@ ul.call-to-action{
 	position: relative;
 	height: 400px;
 }
-
 
 .rnd-btn{
 	cursor: pointer;
@@ -388,23 +608,54 @@ ul.call-to-action{
 }
 
 // ----------------------------------------
+.white-out{
+	z-index: 900;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(white, 0.95);
+}
+
 
 .modal{
+	$wth: 940px;
 	z-index: 1000;
 	display: none;
 	position: absolute;
-	width: 840px;
+	width: $wth;
 	min-height: 200+ ($padS * 2);
-	margin: $padB $padB 0 $padB;
+	//margin: $padB $padB 0 $padB;
 	//padding: $padB;
-	border: 1px solid lighten($lytGray, 10%);
-	background-color: white;
-	@include border-radius($padS);
-	@include box-shadow(0 0 30px 0 rgba(black, 0.25));
+	//border: 1px solid lighten($lytGray, 10%);
+	background-color: rgba(white, 0.95);
+	//@include border-radius($padS);
+	//@include box-shadow(0 0 30px 0 rgba(black, 0.25));
 	//@include opacity(0);
-	behavior: url(css3pie/PIE.htc);
+	//behavior: url(css3pie/PIE.htc);
 
-	&:before{
+	.top-fade, .bottom-fade{
+		pointer-events: none;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 150px;
+	}
+
+	.top-fade{
+		bottom: 100%;
+		@include background-image(linear-gradient(bottom, rgba(white, 0.95), rgba(white, 0)));
+	}
+
+	.bottom-fade{
+		top: 100%;
+		@include background-image(linear-gradient(top, rgba(white, 0.95), rgba(white, 0)));
+	}
+
+	/*&:before{
 		@include pseudo;
 		width: 100%;
 		height: 20px;
@@ -415,7 +666,7 @@ ul.call-to-action{
 			repeat: no-repeat;
 			position: 0 -185px;
 		}
-	}
+	}*/
 
 	ul.buttons{
 		position: absolute;
@@ -447,40 +698,80 @@ ul.call-to-action{
 			background-position: -100px -125px;
 			@include box-shadow(-4px 7px 15px 0 rgba(0, 0, 0, 0.35));
 		}
-
 	}
-
-
 }
 
 .data{
 	position: relative;
 	margin: 98px 0 $padS 290px;
-	width: 520px;
-	padding: 0 0 0 $padS;
+	width: 650px;
+	//min-height: 550px; // making room for the double images in the finalist content (now placed via jquery so that the entries listing are not too long)
+	padding: 0 $padS 0 $padS;
 	border-left: 1px solid $medGray;
 
 	.image{
-		z-index: -1;
+		z-index: 1;
 		position: absolute;
-		top: -98px;
-		left: -290px;
-		width: 290px;
-		height: 300px;
-		//border: 1px solid $medGray;
-		background: {
-			image: url(../img/sketch-sprite-large.png);
-			repeat: no-repeat;
+		background-repeat: no-repeat;
+		
+		&.logo{
+			background-image: url(../img/sketch-sprite-large.png);
+			top: -80px;
+			left: -270px;
+			width: 250px;
+			height: 250px;
+
+			&.finalist{
+				top: 330px;
+			}
+
+			&:before{
+				left: 30px;
+				bottom: 50px;
+			}
 		}
-		//@include border-radius(50%);
-		//behavior: url(css3pie/PIE.htc);
+
+		&.dish, &.chef{
+			background-image: url(../img/finalists-sprite-large.jpg);
+			left: -270px;
+			width: 250px;
+			@include border-radius(5px);
+			behavior: url(css3pie/PIE.htc);
+
+			&:before{
+				left: 30px;
+				bottom: -30px;
+			}
+		}
+
+		&.dish{
+			height: 250px;
+			top: 550px;
+		}
+
+		&.chef{
+			height: 350px;
+			top: 10px;
+			//top: 450px;
+		}
+
+		/*&.finalist{
+			background: {
+				//color: red;
+				image: url(../img/generic-sprite.jpg);
+				position: 0 -270px;
+				repeat: no-repeat;
+			}
+			height: 70px;
+			left: -270px;
+			top: 300px;
+			width: 250px;
+		}*/
 
 		&:before{
 			@include pseudo;
 			width: 190px;
 			height: 30px;
-			left: 50px;
-			bottom: 70px;
 			background: {
 				image: url(../img/transparent-sprite.png);
 				repeat: no-repeat;
@@ -490,81 +781,83 @@ ul.call-to-action{
 		}
 
 		&[data-sprite="cervena-venison"]{
-			background-position: (0 * 290px) center;
+			background-position: (0 * 250px) center;
 
 			&:before{
-				bottom: 50px;
+				bottom: 30px;
 			}
 		}
 
 		&[data-sprite="silere"]{
-			background-position: (-1 * 290px) center;
+			background-position: (-1 * 250px) center;
 
 			&:before{
-				bottom: 50px;
+				bottom: 30px;
 			}
 		}
 
 		&[data-sprite="angus"]{
-			background-position: (-2 * 290px) center;
+			background-position: (-2 * 250px) center;
 
 			&:before{
-				bottom: 60px;
+				bottom: 40px;
 			}
 		}
 
 		&[data-sprite="hereford"]{
-			background-position: (-3 * 290px) center;
+			background-position: (-3 * 250px) center;
 
 			&:before{
-				bottom: 60px;
+				bottom: 40px;
 			}
 		}
 
 		&[data-sprite="reserve"]{
-			background-position: (-4 * 290px) center;
+			background-position: (-4 * 250px) center;
 		}
 
 		&[data-sprite="sff-beef"]{
-			background-position: (-5 * 290px) center;
+			background-position: (-5 * 250px) center;
 		}
 
 		&[data-sprite="sff-venison"]{
-			background-position: (-6 * 290px) center;
+			background-position: (-6 * 250px) center;
 		}
 
 		&[data-sprite="sff-lamb"]{
-			background-position: (-7 * 290px) center;
+			background-position: (-7 * 250px) center;
 		}
-
-		/*&:before{
-			@include pseudo;
-			top: 50%;
-			left: 100%;
-			width: $padS;
-			height: 1px;
-			background-color: $medGray;			
-		}
-
-		&:after{
-			@include pseudo;
-			top: 50%;
-			left: 100%;
-			margin: -10px 0 0 $padS;
-			width: $padS;
-			height: $padS;
-			border: 1px solid $medGray;
-			@include border-radius(50%);
-			// behavior: url(css3pie/PIE.htc); // canot
-		}*/
 	}
 
-	h3{
+	.finalist-chef, .finalist-dish{
 		color: $medBrown;
 	}
 
+	.finalist-restaruent{
+		color: $medGray;
+		padding: 0 0 ($padS / 2) 0;
+
+		.website{
+			color: $lytGray;
+			text-decoration: none;
+
+			&:hover{
+				color: $medBrown;
+			}
+		}
+	}
+
 	h3{
-		padding: $padS 0 ($padS / 2) 0;
+		padding: $padS 0 0 0;
+		color: $medBrown;
+	}
+
+	.finalist-bio{
+		color: $medGray;
+	}
+
+	.finalist-details{
+		//font-weight: bold;
 	}
 
 	.course, .title{
@@ -613,17 +906,23 @@ ul.call-to-action{
 // ----------------------------------------
 
 .slider-container{
-	$wth: 900px;
+	$wth: 840px;
 
 	position: absolute;
-	overflow: hidden;
-	top: 0;
+	//overflow: hidden;
+	background-color: gray;
+	top: 30px;
 	left: 0;
 	width: $wth;
-	height: 420px;
-	margin: 0 $padS 0 $padS;
+	height: 300px;
+	margin: 0 $padB 0 $padB;
+	background: {
+		image: url(../img/generic-sprite.jpg);
+		repeat: no-repeat;
+		position: 0 -770px;
+	}
 
-	.footer-shell{
+	/*.footer-shell{
 		z-index: 150;
 		position: absolute;
 		height: 45px;
@@ -631,26 +930,39 @@ ul.call-to-action{
 		left: 0;
 		bottom: 0;
 		background: {
-			image: url(../img/transparent-sprite.png);
+			//image: url(../img/transparent-sprite.png);
 			position: 0 -70px;
 			repeat: no-repeat;
 		}
+	}*/
+
+	&:after{
+		z-index: 150;
+		@include pseudo;
+		width: 100%;
+		height: 20px;
+		top: 100%;
+		left: 0;
+		background: {
+			image: url(../img/transparent-sprite.png);
+			repeat: no-repeat;
+			position: 0 -185px;
+		}		
 	}
 
-	&:before{
+	/*&:before{
 		z-index: 150;
 		@include pseudo;
 		width: $wth;
 		height: 20px;
 		left: 0;
-		top: 0;
-		//bottom: 100%;
+		bottom: 100%;
 		background: {
 			image: url(../img/generic-sprite.jpg);
-			position: 0 -735px;
+			position: 0 -1235px;
 			repeat: no-repeat;
 		}
-	}
+	}*/
 
 	/*.overlay{
 		z-index: 100;
@@ -664,7 +976,7 @@ ul.call-to-action{
 	}*/
 }
 
-.slider-images{
+/*.slider-images{
 	$wth: 900px;
 
 	position: relative;
@@ -681,7 +993,7 @@ ul.call-to-action{
 		repeat: no-repeat;
 	}
 
-	/*li{
+	li{
 		position: absolute;
 		display: inline-block;
 		background: {
@@ -730,8 +1042,8 @@ ul.call-to-action{
 		height: 100%;
 		background-color: black;
 		@include opacity(0);
-	}*/
-}
+	}
+}*/
 
 /*.slider-controls{
 	display: none;
@@ -1031,7 +1343,7 @@ footer{
 			&:before{
 				background: {
 					image: url(../img/generic-sprite.jpg);
-					position: -25px -590px;
+					position: -25px -1090px;
 					repeat: no-repeat;
 				}
 				border: none !important;
@@ -1046,7 +1358,7 @@ footer{
 			&:after{
 				background: {
 					image: url(../img/generic-sprite.jpg);
-					position: 0 -590px;
+					position: 0 -1090px;
 					repeat: no-repeat;
 				}
 				border: none !important;
@@ -1058,7 +1370,7 @@ footer{
 			&:before{
 				background: {
 					image: url(../img/generic-sprite.jpg);
-					position: -25px -590px;
+					position: -25px -1090px;
 					repeat: no-repeat;
 				}
 				border: none !important;
@@ -1097,7 +1409,13 @@ footer{
 			.shadow{
 				display: none;
 			}
+		}
+	}
 
+	.modal{
+		background: {
+			image: url(../img/trans-pix-95per.png);
+			repeat: repeat !important;
 		}
 	}
 }
@@ -1105,6 +1423,24 @@ footer{
 // ----------------------------------------
 
 .no-cssgradients{
+
+	ul.finalists-container{
+
+		li.nominee{
+
+			.copy-block{
+
+				.gradient{
+					background: {
+						image: url(../img/gradient-sprite.png) !important;
+						position: -100px -250px !important;
+						repeat: no-repeat !important;
+					}
+				}
+
+			}
+		}
+	}
 
 	.chef-container{
 
@@ -1114,7 +1450,7 @@ footer{
 				background: {
 					image: url(../img/gradient-sprite.png) !important;
 					position: -100px 0 !important;
-					repeat: no-repeat;
+					repeat: no-repeat !important;
 				}
 			}
 		}
@@ -1135,6 +1471,24 @@ footer{
 
 		&[data-dir="right"] .gradient{
 			background-position: -50px 0 !important;
+		}
+	}
+
+	.modal{
+
+		.top-fade, .bottom-fade{
+			background: {
+				image: url(../img/gradient-sprite.png) !important;
+				repeat: no-repeat !important;
+			}
+		}
+
+		.top-fade{
+			background-position: 0 -300px !important;
+		}
+
+		.bottom-fade{
+			background-position: 0 -450px !important;
 		}
 	}
 }

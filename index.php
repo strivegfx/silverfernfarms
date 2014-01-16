@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main-v2-1.css">
+        <link rel="stylesheet" href="css/main-v2-2.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         
     </head>
@@ -21,9 +21,22 @@
 
         <div class="sff-wrapper">
 
+            <div class="modal">
+                <ul class="buttons">
+                    <li class="close rnd-btn"></li>
+                    <li class="right rnd-btn direction"></li>
+                    <li class="left rnd-btn direction"></li>                    
+                </ul>
+                <div class="data"></div>
+                <div class="top-fade"></div>
+                <div class="bottom-fade"></div>
+            </div>
+
+            <!--<div class="white-out"></div>-->
+
             <div class="intro">
 
-                <ul class="description clear-fix">
+                <ul class="description underline clear-fix">
                     <li class="left">
                         The first annual Silver Fern Farms Premier Selection Awards is about providing New Zealand’s best chefs with the finest quality cuts of Silver Fern Farms red meat to create the country’s most memorable taste experiences.  At Silver Fern Farms we are passionate about celebrating these experiences and the chefs that make them happen. Now we want to share this with food lovers all over the country.
                     </li>
@@ -34,25 +47,59 @@
                 </ul>
 
                 <ul class="call-to-action">
-                    <li class="top">
+                    <li class="expanded-intro">
                         The awards are a showcase of the talent, artistry and expertise of the country’s best chefs, proving that the finest ingredients in the most talented hands do indeed create something truly extraordinary.
                     </li>
-                    <li class="bottom">
+                   <!-- <li class="bold-cta">
                         To experience these dishes look for a participating restaurant in your area:
-                    </li>                    
+                    </li>-->
                 </ul>
             </div>
 
-            <div class="map-container">
+            <div class="feature-image">
 
-                <div class="modal">
-                    <ul class="buttons">
-                        <li class="close rnd-btn"></li>
-                        <li class="right rnd-btn direction"></li>
-                        <li class="left rnd-btn direction"></li>                    
-                    </ul>
-                    <div class="data"></div>
+                <div class="clip-container">
+
+                    <div class="logo-snippet snippet0"></div>
+
+                    <div class="logo-snippet snippet1"></div>
+                    
+                    <div class="logo-snippet snippet2"></div>
+                    
+                    <div class="logo-snippet snippet3"></div>
+                    
+                    <div class="logo-snippet snippet4"></div>
+                    
+                    <div class="logo-snippet snippet5"></div>
+                    
+                    <div class="logo-snippet snippet6"></div>
+                    
+                    <div class="logo-snippet snippet7"></div>
+                    
+                    <div class="logo-snippet snippet8"></div>
+
                 </div>
+
+            </div>
+
+            <div class="intro-container">
+                <h5 class="underline">finalists</h5>
+
+                <p class="expanded-intro">
+                    THE 10 FINALISTS IN THE SILVER FERN FARMS PREMIER SELECTION AWARD HAVE BEEN FOUND, AND NOW THE HEAT TURNS UP IN THE KITCHEN TO FIND OUT WHO WILL BE CROWNED THE “PREMIER MASTER OF FINE CUISINE”
+                </p>
+                <p class="bold-cta">
+                    Our winner will be announced  on February 12th
+                </p>
+            </div>
+
+            <ul class="finalists-container"></ul>
+
+            <div class="intro-container">
+                <h5 class="underline">entrants</h5>
+            </div>
+
+            <div class="map-container">
 
                 <div class="region-map">
 
@@ -78,7 +125,7 @@
 
                 <div class="slider-container">
 
-                    <div class="slider-images"></div>
+                    <!--<div class="slider-images"></div>-->
 
                     <div class="footer-shell"></div> <!-- set as DOM element and not pseudo element due to IE8 -->
 
@@ -115,7 +162,8 @@
         <script src="js/plugins.js"></script>
         <script src="js/vendor/raphael-min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
-        <script src="js/main-v2-4-ck.js"></script>
+        <!--<script src="js/main-v2-4-ck.js"></script>-->
+        <script src="js/main-v2-5.js"></script>
 
     </body>
 

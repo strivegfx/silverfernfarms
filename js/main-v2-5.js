@@ -19,9 +19,11 @@ $(document).ready(function(){
 			$m.s.ltIe9 = $m.ltIe9();
 			$m.regions.init(); // create the map shapes + add interactivity animations for the map and region list...
 			$m.inputType.listeners.mouse();
+			$m.finalists.init();
 			$m.chefs.init();
 			//$m.slider.init();
 			$m.modal.init();
+			$m.feature.init();
 
 		}, // end of init fnc
 
@@ -34,6 +36,8 @@ $(document).ready(function(){
 			atvReg : null,
 
 			modal : {
+				state : '',
+				random : '',
 				region : '',
 				chef : '',
 				chefLen : ''
@@ -47,7 +51,7 @@ $(document).ready(function(){
 				'medBrown' : 'rgb(155, 126, 84)' // '#9b7e54'
 			},
 
-			'dat' : [
+			entDat : [
 				{
 					'region' : 'upper-north',
 					'path' : 'M193.083,89c1.336-0.651,2.067-1.948,2.466-3.25s0.463-2.609,0.467-3.282c-0.014,0.264-0.059,0.5-0.139,0.715s-0.193,0.412-0.346,0.598c-0.281,0.344-0.797,0.398-1.289,0.418s-0.961,0.004-1.148,0.207s-0.805,0.375-1.352,0.277s-1.023-0.465-0.93-1.34s0.062-1.984-0.074-3.031s-0.379-2.031-0.707-2.656s-0.461-0.859-0.789-0.938s-0.852,0-1.961,0s-2.227-0.164-3.191-0.398s-1.777-0.539-2.277-0.82s-0.539-0.203-0.645-0.156s-0.277,0.062-1.043-0.344s-1.344-0.781-1.621-1.156s-0.254-0.75,0.184-1.156s0.359-1.25,0.098-2.117s-0.707-1.758-1.004-2.258s-0.734-1.414-0.887-2.559s-0.02-2.52,0.824-3.941s1.539-1.977,1.887-2.477s0.348-0.945-0.199-2.148s-0.867-1.367-1.238-1.48s-0.793-0.176-1.543-1.176s-1.578-2.039-2.293-2.965s-1.316-1.738-1.613-2.285s-0.695-1.086-0.762-1.68s0.199-1.242,1.23-2.008s1.172-2.016,0.941-3.172s-0.832-2.219-1.285-2.609s-1-0.891-1.254-1.289s-0.215-0.695,0.504-0.68s0.977-0.086,0.977-0.371s-0.258-0.754-0.57-1.473s-0.417-1.573-0.683-2.362s-0.692-1.513-1.651-1.971c-0.958-0.458-1.166-1.708-1.354-3.052s-0.354-2.781-1.229-3.614s-1.292-1.021-1.49-0.854c-0.198,0.167-0.178,0.688-0.178,1.271s-0.438,0.604-0.969,0.667s-1.156,0.167-1.531,0.917s-1,0.604-1.438,0.114c-0.438-0.489-0.688-1.323-0.312-1.948s0.375-1.271,0.125-1.906s-0.75-1.26-1.375-1.844s-0.938-1.042-1.375-1.469s-1-0.823-2.125-1.281s-2.062-0.5-2.854-0.583c-0.791-0.083-1.438-0.208-1.979-0.833c-0.542-0.625-1.167-1.354-1.729-1.864c-0.562-0.511-1.062-0.802-1.354-0.552s-0.438,1.146-0.698,1.823s-0.636,1.135-1.386,0.51s-0.896-1.229-0.896-1.844c0.001-0.615,0.146-1.24-0.021-1.906s-0.438-0.354-0.761,0.198c-0.323,0.552-0.698,1.343-1.073,1.635s-1.229,0.396-2.031,0.062c-0.802-0.333-1.552-1.104-1.719-2.562c-0.166-1.458-0.687-2.167-1.312-2.656c-0.626-0.49-1.354-0.761-1.938-1.344c-0.583-0.583-1.208-0.812-1.75-1.156s-1-0.802-1.25-1.844s0.292-1.583,0.917-2.052c0.625-0.468,1.333-0.864,1.417-1.614s-0.104-0.75-0.677-0.667c-0.573,0.083-1.531,0.25-2.989-0.167s-2.396-0.75-2.99-0.844S129,0.458,128.917,1s-0.875,0.542-1.614,0.625c-0.74,0.083-1.427,0.25-1.302,1.125s1.5,1.896,3.021,2.938c1.521,1.042,3.188,2.104,3.896,3.062s1.208,2.188,1.75,3.479c0.542,1.292,1.125,2.646,2,3.854s1.584,2.333,2.115,3.292c0.531,0.958,0.886,1.75,1.053,2.292c0.166,0.542-0.146,0.729-0.615,0.948s-1.094,0.469-1.553,1.136c-0.458,0.667-0.562,1.188-0.427,1.729c0.136,0.542,0.511,1.104,1.011,1.854s1.125,1.75,1.781,2.719s1.344,1.906,1.969,2.531s1.146,1.208,1.698,1.833c0.552,0.625,1.136,1.292,1.886,2.083s2.791,3.125,5.021,5.917c2.229,2.792,4.646,6.042,6.146,8.667s2.416,4.396,3.031,5.667c0.614,1.271,0.927,2.042,1.219,2.667s0.521,1.229,0.781,1.542c0.26,0.312,0.552,0.333,0.969-0.208s1.042-0.708,1.438-0.969c0.396-0.26,0.562-0.614,0.062-1.531s-1.229-1.688-1.729-2.261c-0.5-0.573-0.771-0.948-0.354-1.073c0.417-0.125,1.084,0.417,1.719,0.927c0.636,0.511,1.24,0.99,1.531,0.74c0.292-0.25,0.688-0.458,1.104-0.604c0.417-0.146,0.854-0.229,1.229-0.229s0.188-0.812,0.104-1.354c-0.083-0.542-0.062-0.812,0.729,0.271c0.791,1.083,0.791,1.688,0.688,2.177c-0.104,0.49-0.312,0.865,0.062,1.49s-0.479,0.729-1.24,0.865c-0.761,0.135-1.428,0.302-0.678,1.052s1.396,0.583,1.886,0.427s0.823-0.302,0.948,0.49s-0.167,1-0.417,1.229c-0.25,0.229-0.458,0.479-0.167,1.354c0.292,0.875,0.479,2,0.479,2.667c0,0.667-0.188,0.875-0.646-0.083s-0.833-1.625-1.197-2.125c-0.365-0.5-0.72-0.833-1.137-1.125c-0.416-0.292-0.791-0.417-1.125-0.385c-0.333,0.031-0.625,0.219-0.875,0.552s-0.729,0.5-0.938,0.771c-0.208,0.271-0.146,0.646,0.688,1.396c0.834,0.75,1.021,1.167,1.188,1.688c0.167,0.521,0.312,1.146,1.062,2.312s1.229,2,1.615,2.698c0.386,0.698,0.678,1.26,1.053,1.885s0.458,2.188,0.844,3.552c0.385,1.365,1.072,2.532,2.656,2.365c1.583-0.167,1.844-1.406,2.094-2.214c0.25-0.807,0.489-1.182,2.031,0.38c0.219,0.223,0.062,0.402-0.076,0.577c-0.138,0.175-0.258,0.345,0.033,0.548c0.344,0.24,1.094,0.229,1.764,0.398c0.669,0.169,1.258,0.518,1.279,1.477c0,0,0.031,0.302-0.078,0.656s-0.359,0.76-0.922,0.969s-1.146,0.135-1.589,0.099s-0.745-0.037-0.745,0.318s0.083,0.812,0.052,1.141s-0.177,0.526-0.636,0.359c-0.458-0.167-0.406-0.542-0.333-0.927c0.073-0.386,0.167-0.781-0.208-0.99s-0.344-0.636-0.339-1.011S175.646,81,175.166,81c-0.479,0-1.207,0.135-1.723,0.427c-0.516,0.292-0.818,0.74-0.443,1.365s0.947,1.729,1.516,2.948c0.567,1.219,1.13,2.552,1.484,3.636c0.291,0.89,0.666,1.947,1.07,3.069s0.838,2.31,1.247,3.458c1.65-2.489,4.645-3.875,7.575-4.809C188.822,90.161,191.688,89.68,193.083,89z',
@@ -58,7 +62,7 @@ $(document).ready(function(){
 						["Annabelle's","Susan ","Cho","Owner","409 Tamaki Drive","St Heliers","Auckland","09 575 5239","Eye Fillet of Beef","Main","Silver Fern Farms Beef Eye Fillet","Eye fillet with mustard mash potato, spinach balsamic roast tomato and thyme jus","sff-beef"],
 						["Vinnie's","Andrew","Hanson","Head Chef","166 Jervois Road","Herne Bay","Auckland","09 360 4340","Loin Fillet","Main","Silere Alpine Origin Merino Lamb Loin Fillet","Silere Alpine Origin Merino, goats cheese gnocchi, beetroot, young fennel, lamb and pernod juices. The inspiration was to create a dish that complimented the lamb without over powering it, to allow the sweetness of the lamb to shine through and do something interesting with a secondary cut (Lamb Flap)","silere"],
 						["Mudbrick Winery","Mathias","Schmitt","Head Chef","Church Bay Road","Waiheke 1091","Auckland","09 372 9050","Lamb Rump","Main","Silere Alpine Origin Merino Lamb Rump","Alpine Origin Merino Lamb Rump, BBQ, sage, chilli, ale, (BBQ sauce marinated rump then grilled on the BBQ , banana /potato moussillinni and patotoe struesel, crispy sage, pickled chillies)","silere"],
-						["OConnell Street Bistro","Alex","Strobach","Head Chef","3 O'Connell St","","Auckland","09 377 1884","Silver Fern Farms Venison Loin with creme fraiche spatzle","Main","Cervena Vension Loin ","Silver Fern Farms Venison Loin creme fraiche spatzle sauteed rainbow chard, mushrooms and green peppercorn jus. The Head Chef is German born and a hunter. This inspired him and is integrated into the dish","cervena-venison"],
+						["O’Connell Street Bistro","Alex","Strobach","Head Chef","3 O’Connell St","","Auckland","09 377 1884","Silver Fern Farms Venison Loin with creme fraiche spatzle","Main","Cervena Vension Loin ","Silver Fern Farms Venison Loin creme fraiche spatzle sauteed rainbow chard, mushrooms and green peppercorn jus. The Head Chef is German born and a hunter. This inspired him and is integrated into the dish","cervena-venison"],
 						["La Fourchette","Sophie","Phipps","Exec Chef","8 Turua Street","St Heliers","Auckland","09 215 8332","Cote de Bueuf for 1 or 2","Main","Reserve rib eye of beef, 450g or 700g","Inspiration to create a steak dish, uncomplicated by over handling and not buried in noisy garnish, just quality meat, skilfully cooked. OP Rib eye, manuka smoked potato puree, quince jelly, caramelised prunes, confit fennel and port wine jus.","reserve"],
 						["Toto","Sergio","Maglione","Chef /Owner","53 Nelson Street","CBD","Auckland","09 302 2665","Tagliata di agnello","Main","Silere Alpine Origin Merino Lamb Rump","Marinated merino lamb rump tagliata, oven roasted summer eggplant, semi dry tomato,","silere"],
 						["Poderi Crisci","Antonio","Crisci","Owner","205 Awaawaroa Road","Awaawaroa Bay","Waiheke Island","09 379 0400","Medaglione Di Cervo marinato alla sapa con vulcano di polenta e verdurine di stagione","","Cervena Vension Leg ","Medallions of Silver Fern Farm venison leg marinated in spiced Poderi Crisci 'sapa' with polenta volcano, pan juice braised garden vegetables matched with Poderi Crisci Virburno 2009","cervena-venison"],
@@ -102,7 +106,7 @@ $(document).ready(function(){
 						["Scopa Caffe Cucina","Jack","O'Donnell","Head Chef","141 Cuba Street","Te Aro","Wellington","04 384 6020","Seared Silver Fern Farms Venison","Entrée/salad","Silver Fern Farms Venison Loin","The inspiration for this dish is taken from the superior quality of Silver Fern Farms venison loin and how best to showcase this product in an original and interesting manner. The creaminess of whipped goats cheese serves to offset the caramalisation on the seared loin while the cheese's infusion of juniper compliments the meat's exotic qualities. The pairing of beetroot further enhances the meats earthy characteristics and the hazelnut praline and vincotto draw one's attention to the particular sweetness of Silver Fern Farms venison loin while the lightly dressed spring greens offset this sweetness and bring the dish's components together to subsequently underline this product's potential","sff-venison"],
 						["Muse on Allen","Samuel ","North","Head Chef","16-18 Allen Street","Te Aro","Wellington","04 384 1181","Boneless Lamb Rack","Main","Silere Alpine Origin Merino Lamb Rack","My dish will be served with young beetroots, a beetroot gel, beetroot powder, goats cheese mousse braised balsamic lentils, this dish has been inspired by taking a few simple ingredients and changing them into something attractive and tasty","silere"],
 						["One 80 Restaurant","Chetan","Pangam","Exec Chef","Level 7, Copthorne Hotel","Oriental Bay, 100 Oriental Parade","Wellington","04 385 0279","Duo of Silere Alpine origin Merino Lamb","Main","Silere Alpine Origin Merino Lamb Rump and Silere Alpine Origin Merino Lamb Rib","Dukkah roast silere lamb rumps, braised ribs, sesame crumbed sweetbreads potenta, confit beetroot, baby carrots, lamb jus. Vibrant fresh spring inspired dish, where the lamb is the hero of the dish","silere"],
-						["Pravda Café","Adam","Rickett","Head Chef","107 Custom House Quay","","Wellington","04 801 8858","Beef Tataki with Pickled enoke","Entrée","Reserve Beef Sirloin","Seared beef tataki with white soy ponzu, pickled enoke and toasted grains. To truly showcase the quality and flavour of the beef I wanted to present it in its purest form, for me this is raw. I have drawn from recent travels around Europe and Japan to create a balanced dish with the Silver Fern Farms product at the centre","reserve"],
+						["Pravda Café","Adam","Rickett","Head Chef","107 Custom House Quay","","Wellington","04 801 8858","Beef Tataki with Pickled enoki","Entrée","Reserve Beef Sirloin","Seared beef tataki with white soy ponzu, pickled enoki and toasted grains. To truly showcase the quality and flavour of the beef I wanted to present it in it's purest form, for me this is raw. I have drawn from recent travels around Europe and Japan to create a balanced dish with the Silver Fern Farms product at the centre","reserve"],
 						["Foxglove","Joshua","Dodd","Head Chef","33 Queens Wharf","","Wellington","04 460 9410","Venison tartar","","Silver Fern Farms Vension Denver Leg","Venison tartar, horseradish, potato, wood sorel and juniper. Inspiration comes from local foraged wood sorrell and the change of the seasons","sff-venison"]
 					]
 				}, // end of lower-north obj
@@ -151,7 +155,165 @@ $(document).ready(function(){
 						["Mckinnon Room Restaurant","Ken","O'Connell","Group Executive Chef","Distinction Hotel and Villas","64 Lakefront Drive","Te Anau ","03 2499 700","Fillet of Venison","Main","Silver Fern Farms Venison Fillet and Cheek","Fillet of venison, braised cheek and venison ham croquette, juniper poached pear celeriac and baby carrots, potato puree in brick pastry and a venison jus","sff-venison"]
 					]
 				} // end of lower-south obj
-			] // end of dat obj
+
+			], // end of entDat obj
+
+			finDat : [
+				{
+					'chefName' : 'Adam Rickett',
+					'restaurant' : 'Pravda Café',
+					'cut' : 'reserve',
+					'bio' : [
+						'I have grown up working in kitchens since the age of fifteen. I spent the first few years of my career working in small gastro pubs just outside of north London. I moved to Cornwall when I was seventeen and went to Cornwall College St Austell to get my qualifications. Since then I have worked in all avenues of the kitchen world, from pubs to cafes to catering companies to production kitchens to fine dining restaurants.',
+						'I originally came to New Zealand for a years working holiday, shortly after then I found myself working for the Nourish Group who quickly invested in me and made me Head Chef at Pravda. I have been in the country for five years and am now a resident. I have fallen in love with the country and have felt most at home since moving to Wellington and getting involved with the amazing hospitality scene that resides in the city.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Silver Fern Farms Reserve beef tataki with white soy ponzu, pickled enoki and toasted grains.</strong>',
+						'I entered the competition simply because I love a good excuse to do something new, in this instance the main purpose was to showcase the Silver Fern Farms product. To get into the final alongside such prestigious chefs from around the country is very humbling.',
+						'To truly showcase the quality and flavour of the beef I wanted to present it in it’s purest form, for me this is raw. I have drawn from recent travels around Europe and Japan to create a balanced dish with the Silver Fern Farms product at the centre.'
+					]
+				},
+				{
+					'chefName' : 'Alex Strobach',
+					'restaurant' : 'O’Connell Street Bistro',
+					'cut' : 'cervena-venison',
+					'bio' : [
+						'German born Alex Strobach arrived in New Zealand after working at the prestigious Gleneagles Hotel in Scotland. Alex worked at the French Café as Sous Chef before joining O’Connell Street Bistro as Head Chef in October 2012.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Silver Fern Farms Cervena venison loin, crème fraiche spatzle, sautéed rainbow chard, mushrooms & green peppercorn jus.</strong>',
+						'Alex is a mad keen hunter & fisherman & his dish reflects his German heritage & incorporates his passion for hunting.'
+					]
+				},
+				{
+					'chefName' : 'Andrew Clarke',
+					'restaurant' : 'Victoria Street Bistro',
+					'cut' : 'silere',
+					'bio' : [
+						'Andrew Clarke is a renowned chef in the Waikato and has made his name in some of the city’s most prominent restaurants. He began his career in 1996 at Gails of Tamahere before moving on to Tables on the River where he rose to the position of Sous Chef. Seeking to broaden his abilities, Andrew then spent a number of years in Melbourne working under celebrity British chef Justin Derrick in the Marque Hotel, and as Chef de Partie in Treasury Restaurant at the Sebel.',
+						'Andrew returned to Hamilton taking up a position at Balcony Restaurant where he was eventually appointed as Head Chef. In 2007 Andrew opened OneZB and over the following three years was awarded three beef and lamb plates, as well as the 2008 regional title in the Monteith’s Wild Food Challenge and national runner up in the Corban’s Perfect Wine and Food Match.',
+						'Since opening Victoria Street Bistro, Andrew has won the 2011 Mercedez Benz Great Waikato Food Challenge and placed in the final three in the televised national finals of the Monteith’s Beer and Wild Food Challenge.  At Victoria Street Bistro, Andrew combines his culinary gifts with the front of house leadership of expert restaurateur Julia Clarke to create Hamilton’s premiere dining experience.',
+						'Andrew’s culinary directions are inspired by a number of nationalities. He describes himself as unbiased in his ethnic influences with the old world style of Italy and France sitting happily alongside the exciting flavours of Asia and the Middle East. Much of his passion is derived from the joy experienced in creating these flavours from quality New Zealand produce which he rates as the equal of anywhere in the world. Andrew’s menus pay homage to classic flavour combinations, but he is always investigating new and innovative techniques to keep his food at the cutting edge.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>SILERE alpine origin merino rump with honey braised spare rib, macadamia dukkah, black lentil dhal, swede, carrot purée and spring greens.<strong>'
+					]
+				},
+				{
+					'chefName' : 'Craig Hendry',
+					'restaurant' : 'Gantleys',
+					'cut' : 'hereford',
+					'bio' : [
+						'I was lucky enough to grow up on a small Scottish Island where the population has never been more than 3000. My family have always been involved with aspects of small holdings and game hunting and most of the produce back then was locally sourced. I often remember coming home and a basket of langoustines being left on the doorstep from locals out fishing.  This is where my inspiration comes from for home-grown food cooked well and enjoyed with the family.',
+						'I moved to Glasgow to start my career where I worked in numerous establishments learning the trade from experienced chefs. This was a very different flavour to what I was used to, fast paced and big numbers coming through the door, it was exhilarating yet you had no other life.',
+						'As good an experience as this was I decided to travel and broaden my horizons throughout Europe and Australia before finally what felt like coming home to New Zealand. I have been a Chef in Queenstown for over ten years working at some of the top restaurants here, including formative years at Wai Restaurant. It’s where I met my wife and where we raise our young family including the five chickens roaming free in the garden. I feel privileged to live here, with the many opportunities to cook great food locally sourced and beautiful local wines to accompany.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Silver Fern Farms Hereford braised beef rib and beef fillet, blue cheese beignet, pan jus and seasonal vegetables.</strong>',
+						'The inspiration for the dish came from the beef rib and trying to match that to flavours and textures that I thought would accompany it well. I have always thought the beef rib is a great cut and under utilised.  By pairing it with the more common fillet, the customer gets to enjoy a variation of cooking techniques on one dish.'
+					]
+				},
+				{
+					'chefName' : 'Greg Piner',
+					'restaurant' : 'Pier 24',
+					'cut' : 'cervena-venison',
+					'bio' : [
+						'I have worked in some of New Zealand’s top hotels in Queenstown, including Blanket Bay and the award winning St Moritz Grand Mercure.',
+						'My current position is Head Chef at Pier 24 at St Clair Beach Resort under executive chef, Michael Coughlin.',
+						'My home on the West Coast was built for entertaining groups to my cooking demos, which I was doing right up until my move to Dunedin.  I spent 12 years in Queenstown, chefing at different hotels and restaurants, from Blanket Bay to being executive chef at NZSKI.com. I was also product development manager for the Mediterranean Group in Queenstown, sourcing new food and product that top chefs in Queenstown could use.',
+						'My travels lead me to work at the Christchurch casino, and then on to Auckland to Mikano under Wawrick Brown. I was also a private chef for Sir Bob Jones while on his trip to the West Coast.  I was chef for the Williams Porsche race team for 2008 and I had involvement with Lake Brunner Lodge on the West Coast planning new menus and putting a new spin on things.',
+						'One of my biggest loves is using fresh New Zealand products, and keeping the food simple.  Seafood is my background and I enjoy coming up with new ideas that think outside the square. The people you meet are important when you are a chef, having a good relationship with guests, "nothing’s a problem". I also enjoy surfing, snowboarding, travel and have made my way in to "Top Gear" magazine for my love of cars. I am also a gourmet traveller, Accor traveller and featured on an Australian travel television programme as a guest chef.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Chargrilled Silver Fern Farms Cervena venison loin, green pepper corn and sage pesto, leek and black pudding tart, glazed beetroot, blood orange jus.</strong>',
+						'I entered the awards, to showcase what a great product we get to work with everyday. Being in the finals is a great reward for all the hard work that the Pier 24 team have put into the dish – it’s an amazing feeling.'
+					]
+				},
+				{
+					'chefName' : 'Mat Mclean',
+					'restaurant' : 'Palate',
+					'cut' : 'reserve',
+					'bio' : [
+						'Mat Mclean has established a reputation as one of New Zealand’s leading chefs and his restaurant Palate is regarded as one of this country’s best restaurants.',
+						'Mat is a chef with highly developed technical skills, who’s committed to cooking with seasonal, local produce. He is not afraid to experiment with flavours and textures.',
+						'Few regional restaurants have quite the same level of panache as Palate which, since opening its doors in 2005, has clearly shown a commitment to good food and wine, great service and overall quality.',
+						'He gained his professional qualifications at the Waikato Polytechnic and was awarded a scholarship to work in the UK. From 1998 to 2001 he gained invaluable work experience in London at Prue Leith’s Restaurant in Notting Hill (1 Michelin star) and at the Capital Hotel in Knightbridge (2 Michelin stars).',
+						'During 2002 and 2003 Mat was Executive Chef at Otto’s Restaurant in Auckland (Mat was awarded Metro Restaurant of the Year during his tenure here). In 2004 Mat travelled to Melbourne and worked as Head Chef at the Middle Bite and Bar (a 1 hat restaurant).',
+						'Upon his return to New Zealand he opened Palate Restaurant in February 2005.',
+						'Mat has been a Beef and Lamb Ambassador since 2009.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Silver Fern Farms Reserve eye fillet and slow cooked short rib, smoked kumara, shitaki salad, baby turnip, soy chilli butter.</strong>'
+					]
+				},
+				{
+					'chefName' : 'Robert Richardson',
+					'restaurant' : 'Molten',
+					'cut' : 'silere',
+					'bio' : [
+						'I have worked in a number of leading New Zealand restaurants such as Icon @ Te Papa with Peter Thornley, The Hunting Lodge with Geoff Scott and Martin Bosley’s and Kermadec to name a few.',
+						'I’m a big believer of using seasonal produce sourced directly from the grower and allowing the produce to star i.e. not letting the chef’s muck around with it too much!'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Slow-roasted SILERE alpine origin merino lamb rump with eggplant purée, peas, fior di latte & white anchovy.</strong>',
+						'The SILERE lamb rump is slow roasted at a low temperature, and features accompanying produce which is at its peak this time of year – peas and eggplant. The peas are dressed with a mixture of mint, basil, parsley and lemon to add flavour and brightness to the dish. The fior di latte adds another textural element, while the white anchovy fillets and lamb are a classic pairing throughout the Mediterranean.'
+					]
+				},
+				{
+					'chefName' : 'Scott Corbett',
+					'restaurant' : 'Pepper Tree Restaurant',
+					'cut' : 'sff-venison',
+					'bio' : [
+						'I was drawn to the Coromandel over a decade ago for its fishing, beaches and the idea of a cold beer while enjoying them both.',
+						'My passion for local ingredients, combined with the region’s abundance of fresh seafood, game & produce has resulted in the creativity of dishes that have been multi-award winning.',
+						'My simple, no fuss philosophy combined with creativity has made for much success at the Pepper Tree.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'“One Bittersweet Fallow”:',
+						'<strong>Silver Fern Farms Cervena venison cutlet served medium-rare with blackberry & tamarillo jelly, venison liver paté, almond crusted kumara, walnuts, witlof salad and syrah jus.</strong>',
+						'This has been a great opportunity to create a unique dish not normally offered on our restaurant menus.'
+					]
+				},
+				{
+					'chefName' : 'Sebastian Koburg',
+					'restaurant' : 'Saggio Di Vino',
+					'cut' : 'silere',
+					'bio' : [
+						'I was born in Berlin literally a stones throw from the wall and grew up with four siblings and down to earth food from my catholic mother - who was the one who put me in a kitchen in the first place.',
+						'I met my partner, a maitre´ d, 14 years ago and started to travel & work extensively through Europe and Asia, including work experience from cooking in Swiss Alp resorts to being the concert tour chef of the Red Hot Chilli Peppers.',
+						'My son Levin, now 6 years old, who was made in New Zealand but born in Berlin, was one reason we came back to New Zealand for a change of lifestyle.',
+						'I have been working as Head Chef at Saggio di vino for 18 months now and enjoying the huge palate of mother-natures products this country has to offer.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>SILERE alpine origin merino french lamb rack – pan fried and baked in the oven till medium.   Sweet & sour kumara - diced and cooked with shallots, chilli, lime leaves, New Zealand honey, chardonnay vinegar and finished with coriander. Braised chicory with olive oil, butter, orange and juniper berries and sage jus cooked out of beef bones and lamb trimmings & fresh sage.</strong>',
+						'The inspiration for my dish comes from the meat itself - lamb with the slightly sweet taste accompanied by honey, sage and shallots sweetness and the slightly sour and bitter taste accompanied by vinegar and chicory. There is also a spring and summer warm kick from kaffir leaves and coriander. I chose the lamb rack because I like it when guests have to use their hands to eat and really touch the meat.'
+					]
+				},
+				{
+					'chefName' : 'Shaun Clouston',
+					'restaurant' : 'Logan Brown',
+					'cut' : 'reserve',
+					'bio' : [
+						'Head Chef of Wellington’s Logan Brown Restaurant & Bar since 2006,   Shaun studied and worked in New Zealand for several years, including four years at Logan Brown in the late nineties, before moving to Sydney where, during five years, he cooked at La Grillade, Infusion@333 and Wildfire restaurants.  In 2006, Shaun was approached by Logan Brown Restaurant owners, Steve Logan and Alister Brown, to rejoin the restaurant as their Head Chef.  In 2008 Shaun became a business partner at Logan Brown.',
+						'Shaun’s philosophy on food and cooking is to serve classical but skilfully cooked dishes, using good techniques, to create a consistent result every time; and using the best local, seasonal ingredients you can get your hands on. Paramount to all of this is the use of ethical and environmentally friendly producers and suppliers.',
+						'Logan Brown has earned its reputation as one of New Zealand’s finest restaurants by staying consistent to the philosophy of cooking generous, full-flavoured and honest food – a philosophy which Shaun also shares.   “And we are far more seasonal in New Zealand than in other parts of the world, where most products are available year round, so we have a constantly evolving menu here” - as new ingredients come into season we tweak and introduce new dishes to the menu, often on a weekly basis.'
+					],
+					'dish' : 'Final’s Dish',
+					'details' : [
+						'<strong>Silver Fern Farms Reserve beef rump cooked medium rare, with slowly braised short rib marinated in pear juice and soy. Served with grilled barley cake and Korean inspired flavours.</strong>',
+						'For this Reserve beef dish, I used two of my favorite beef cuts, the rump cap and short rib. I have been inspired by Korean chefs that I have worked with in my travels and really loved the fresh flavours of Kim Chi, sesame leaf and black garlic. The Reserve rump cap was simply cooked to medium rare to showcase its flavour and tenderness. The short rib was marinated in pear juice and soy beforebeen slowly braised.  Then served with a grilled barley cake and a combination of the previously mention Korean inspired flavours.'
+					]
+				}
+			]
 		}, // end of setting obj
 
 		svgTest : function(){
@@ -266,7 +428,7 @@ $(document).ready(function(){
 			init : function(){
 
 				var $r    = new Raphael('paper', 500, 500), // initializes Raphael on the #paper DOM element
-					$len  = $m.s.dat.length, // find out how many regions there are in the data array
+					$len  = $m.s.entDat.length, // find out how many regions there are in the data array
 					$attr = { // set the generic attributes that the Raphael svg / vml shapes will take on
 						'fill' : 'gray',
 						'stroke' : 'none',
@@ -281,7 +443,7 @@ $(document).ready(function(){
 
 				for($i = 0; $i < $len; $i++){ // loop though each of the map regions...
 
-					$path = $m.s.dat[$i].path; // fetch path data from stored data inside the setting obj
+					$path = $m.s.entDat[$i].path; // fetch path data from stored data inside the setting obj
 
 					$map = $r.path($path).attr($attr); // add the path data to the Raphael obj
 					$li = $rl.find($('li[data-num="' + $i + '"]')); // find the current list item
@@ -412,6 +574,139 @@ $(document).ready(function(){
 
 		// ----------
 
+		finalists : {
+
+			init : function(){
+
+				var $fc = $('.finalists-container');
+
+				$m.finalists.listeners($fc);
+				$m.finalists.popData.init($fc);
+
+			}, // end of init fnc
+
+			listeners : function($fc){
+
+				var $ani = $m.s.ani;
+
+				$fc.on('click', '.nominee', function(){
+
+					//console.log('nominee clicked!');
+
+					$m.finalists.actions.onclick($(this));
+
+				}).on('mouseenter', '.nominee', function(){
+
+					//console.log('nominee entered!');
+
+					$m.finalists.actions.onmouseenter($(this), $ani);
+
+				}).on('mouseleave', '.nominee', function(){
+
+					//console.log('nominee leave!');
+
+					$m.finalists.actions.onmouseleave($(this), $ani);
+
+				});
+
+			},  // end of listeners
+
+			actions : {
+
+				onclick : function($this){
+
+					var $chf = $this.attr('data-chef');
+
+					$m.s.modal.chf = $chf; // add the chef reference to the modal object (for using the left and right buttons on the modal UI)
+					$m.s.modal.state = 'finalists';
+
+					$('.modal').find('.data')
+						.css({'min-height' : '535px'})
+						.html($m.modal.populate.finalists($chf));
+
+					$m.modal.actions.rndBtn.state.finalists($chf, 10); // modify the states of the left and right buttons to active / inactive if need be
+
+					$m.modal.position('finalists');
+
+				}, // end of onclick fnc
+
+				onmouseenter : function($this, $ani){
+
+					var $img = $this.find('.image'),
+						$shd = $this.find('.shadow');
+
+					TweenMax.to($img, $ani, {'top' : '0', 'scale' : '1.1'});
+					TweenMax.to($shd, $ani, {'opacity' : '1', 'scale' : '1.1'});
+
+				}, // end of onmouseenter
+
+				onmouseleave : function($this, $ani){
+
+					var $img = $this.find('.image'),
+						$shd = $this.find('.shadow');
+
+					TweenMax.to($img, $ani, {'top' : '20px', 'scale' : '1'});
+					TweenMax.to($shd, $ani, {'opacity' : '0.5', 'scale' : '1'});
+
+				} // end of onmouseleave
+
+			}, // end of actions obj
+
+			popData : {
+
+				init : function($fc){
+
+					var $finDat = $m.s.finDat,
+						$finDatLen = $finDat.length,
+						$html = '',
+						$i;
+
+					for($i = 0; $i < $finDatLen; $i++){
+
+						//console.log('--> bio = ' + $finDat[$i].bio);
+						//console.log('--> details = ' + $finDat[$i].details);
+
+						$html += '<li class="nominee" data-chef="' + $i + '">' +
+									'<div class="image" style="background-position: ' + ($i * -80) + 'px 0"></div>' +
+									'<div class="shadow"></div>' +
+									'<div class="copy-block">' +
+										'<h3>' + $finDat[$i].chefName + '</h3>' +
+										'<h3 class="restaurant">(' + $finDat[$i].restaurant + ')</h3>' +
+										$m.finalists.popData.paraLoop($finDat[$i].bio) +
+										'<h3>Final’s Dish</h3>' +
+										$m.finalists.popData.paraLoop($finDat[$i].details) +
+										'<div class="gradient"></div>' +
+									'</div>' +
+								'</li>';
+
+					} // end of for loop
+
+					$fc.html($html);
+
+				}, // end of init fnc
+
+				paraLoop : function($dat){
+
+					var $datLen = $dat.length,
+						$html = '',
+						$i;
+
+					for($i = 0; $i < $datLen; $i++){
+
+						$html += '<p>' + $dat[$i] + '</p>';
+
+					} // end of for loop
+
+					return $html;
+
+				} // end of paraLoop fnc
+
+			} // end of popData fnc
+
+		}, // end of finalists obj
+
+		// ----------
+
 		chefs : {
 
 			init : function($i){
@@ -428,7 +723,7 @@ $(document).ready(function(){
 				var $wth = 0, // the ul width that will be the exact length to hold all of the created chef li's...
 					$li  = '', // shell for housing the list data
 					$ani = $m.s.ani,
-					$j, $dat, $regLen, $chfLen, $ran, $ul, $srlCon; // nulls to populate later
+					$j, $entDat, $regLen, $chfLen, $ran, $ul, $srlCon; // nulls to populate later
 				
 				if(isNaN($i)){ // if $i has not been defined then this is the first time that the chefs are being populated... in that regard chefs ALL regions will reside inside the ul via random population
 
@@ -440,23 +735,24 @@ $(document).ready(function(){
 
 				} // end of if statement
 
+				$m.s.modal.random = $ran;
+
 				if($ran){ // if $i has not been defined then this is the first time that the chefs are being populated... in that regard chefs ALL regions will reside inside the ul
 					
 					$i = 0; // set $i to zero as chefs in ALL regions will be displayed
 					
-					$regLen = $m.s.dat.length; // set the region loop length to be = to the anount of regions in the data set
+					$regLen = $m.s.entDat.length; // set the region loop length to be = to the anount of regions in the data set
 
 				}else{ // if $i has been defined then we will populate teh chefs from the used selected region... $i will = the region array reference with the loop length being $i + 1 so that it will run only once
 
 					$chfCon = $('.chef-container'); // set the DOM reference as it will not be pulled though from the init()
 					
 					$regLen = $i + 1; // set the region loop length to run the loop only ONCE!
-					
-					$('.map-container')
-						.find('.modal')
+
+					/*$('.modal')
 						.find('.buttons')
 						.find('.direction')
-						.css({'display' : 'block'});
+						.css({'display' : 'block'});*/
 
 				} // end of if statement
 
@@ -465,10 +761,10 @@ $(document).ready(function(){
 				// if there is only a single specific region set to loop though $i will = the region array reference with the loop length being $i + 1 so that it will run only once
 				for($i; $i < $regLen; $i++){
 
-					$dat = $m.s.dat[$i].chefs; // get the data from selected region
+					$entDat = $m.s.entDat[$i].chefs; // get the data from selected region
 
 					// set non random parameters...
-					$chfLen = $dat.length; // find the loop length for the entry in the current region
+					$chfLen = $entDat.length; // find the loop length for the entry in the current region
 					$j = 0; // loop will start at the begining of the array
 
 					if($ran){
@@ -482,30 +778,30 @@ $(document).ready(function(){
 
 					for($j; $j < $chfLen; $j++){ // loop though the region data and populate the li...
 
-						$li +=  '<li data-region="' + $i + '" data-chef="' + $j + '" data-sprite="' + $dat[$j][12] + '">' + // open li element
+						$li +=  '<li data-region="' + $i + '" data-chef="' + $j + '" data-sprite="' + $entDat[$j][12] + '">' + // open li element
 								'<div class="shadow"></div>' +
 								//'<img src="img/_temp-placeholder-.jpg" alt="' + $dat[$j][8] + '">' +
 								//'<div class="image" style="background-position:' + (0 * -100) + 'px 0;"></div>' +
 								'<div class="image"></div>' +
-								'<h3>' + $dat[$j][0] + '</h3>';
+								'<h3>' + $entDat[$j][0] + '</h3>';
 
-						if($dat[$j][8] !== ''){ // if there is A DISH NAME stipulated in the entry data...
+						if($entDat[$j][8] !== ''){ // if there is A DISH NAME stipulated in the entry data...
 
-							$li +=  '<h4>' + $dat[$j][8] + '</h4>';
+							$li +=  '<h4>' + $entDat[$j][8] + '</h4>';
 
 						}else{ // if there is NO DISH NAME stipulated in the entry data...
 
-							$li +=  '<h4>' + $dat[$j][10] + '</h4>'; // then subsitute the description for the cut name
+							$li +=  '<h4>' + $entDat[$j][10] + '</h4>'; // then subsitute the description for the cut name
 
 						} // end of if statement
 
-						if($dat[$j][11] !== ''){ // if there is A DESCRIPTION stipulated in the entry data...
+						if($entDat[$j][11] !== ''){ // if there is A DESCRIPTION stipulated in the entry data...
 
-							$li +=  '<span>' + $dat[$j][11] + '</span>';
+							$li +=  '<span>' + $entDat[$j][11] + '</span>';
 
 						}else{ // if there is NO DESCRIPTION stipulated in the entry data...
 
-							$li +=  '<span>' + $dat[$j][1] + ' ' + $dat[$j][2] + '</span>'; // then subsitute the description for the chef name
+							$li +=  '<span>' + $entDat[$j][1] + ' ' + $entDat[$j][2] + '</span>'; // then subsitute the description for the chef name
 
 						} // end of if statement
 
@@ -549,9 +845,7 @@ $(document).ready(function(){
 
 					$srlCon = $chfCon.find('.scroll-container');
 
-					//TweenMax.to($srlCon, ($ani * 5), {'scrollLeft' : 235}); // send the scroll container back to the start of the list (leaving a bit of padding as per usual)
-
-					TweenMax.set($srlCon, {'scrollLeft' : '-235'});
+					TweenMax.to($srlCon, ($ani * 5), {'scrollLeft' : -235}); // send the scroll container back to the start of the list (leaving a bit of padding as per usual)
 
 					for($i = 0; $i < 3; $i++){ // loop through the first three chef entries and fade them into view (stops the harsh append transition - as it sometimes looks like the content has not been repopulated with the new region data)
 
@@ -559,9 +853,9 @@ $(document).ready(function(){
 
 					} // end of for loop
 
-				} // end of if statement
+					$m.s.modal.chfLen = $chfLen; // add the chef length to the modal object for future reference (using the left and right buttons on the modal UI)
 
-				$m.s.modal.chfLen = $chfLen; // add the chef length to the modal object for future reference (using the left and right buttons on the modal UI)
+				} // end of if statement
 
 			}, // end of popChef fnc
 
@@ -701,13 +995,15 @@ $(document).ready(function(){
 
 						$m.s.modal.reg = $reg; // add the region reference to the modal object (for using the left and right buttons on the modal UI)
 						$m.s.modal.chf = $chf; // add the chef reference to the modal object (for using the left and right buttons on the modal UI)
+						$m.s.modal.state = 'entries';
 
-						$mod.find('.data').html($m.modal.populate($reg, $chf));
+						$mod.find('.data')
+							.css({'min-height' : '0'})
+							.html($m.modal.populate.entries($reg, $chf));
 
-						$m.modal.actions.rndBtn.state($chf, $m.s.modal.chfLen); // modify the states of the left and right buttons to active / inactive if need be
+						$m.modal.actions.rndBtn.state.entries($chf, $m.s.modal.chfLen); // modify the states of the left and right buttons to active / inactive if need be
 
-						$mod.css({'display' : 'block'});
-						TweenMax.to($mod, $ani, {'opacity' : '1'});
+						$m.modal.position('entries');
 
 					}, // end of onclick fnc
 
@@ -871,7 +1167,15 @@ $(document).ready(function(){
 				$mod.find('.left')
 					.on('click', function(){
 
-						$m.modal.actions.leftBtn.onclick($mod, $ani);
+						if($m.s.modal.state === 'entries'){
+
+							$m.modal.actions.leftBtn.onclick.entries($mod, $ani);
+
+						}else if($m.s.modal.state === 'finalists'){
+
+							$m.modal.actions.leftBtn.onclick.finalists($mod, $ani);
+
+						} // end of if statement
 
 					});
 
@@ -880,7 +1184,15 @@ $(document).ready(function(){
 				$mod.find('.right')
 					.on('click', function(){
 
-						$m.modal.actions.rightBtn.onclick($mod, $ani);
+						if($m.s.modal.state === 'entries'){
+
+							$m.modal.actions.rightBtn.onclick.entries($mod, $ani);
+
+						}else if($m.s.modal.state === 'finalists'){
+
+							$m.modal.actions.rightBtn.onclick.finalists($mod, $ani);
+
+						} // end of if statement
 
 					});
 
@@ -940,30 +1252,78 @@ $(document).ready(function(){
 
 					}, // end of onmouseleave fnc
 
-					state : function($chf, $chflen){
+					state : {
 
-						var $btns = $('.map-container').find('.modal').find('.buttons'),
-							$left = $btns.find('.left'), // get left button
-							$right = $btns.find('.right');// get right button
+						entries : function($chf, $chflen){
 
-						if($chf <= 0){
+							var $btns = $('.modal').find('.buttons'),
+								$left = $btns.find('.left'), // get left button
+								$right = $btns.find('.right');// get right button
 
-							$left.css({'opacity' : '0.25'}); // change to inactive
-							$right.css({'opacity' : '1'}); // change to active
+							//console.log('random value from global settings = ' + $m.s.modal.random);
 
-						}else if($chf >= ($chflen - 1)){
+							if($m.s.modal.random){
 
-							$left.css({'opacity' : '1'}); // change to active
-							$right.css({'opacity' : '0.25'}); // change to inactive
+								//console.log('random number = true!');
 
-						}else{
+								$left.css({'display' : 'none'});
+								$right.css({'display' : 'none'});
 
-							$left.css({'opacity' : '1'}); // change to active
-							$right.css({'opacity' : '1'}); // change to active
+								return ''; // break the statement as no modifications to the left and right buttons are needed (as they are now hidden)
 
-						} // end of if statement
+							} // end of if statement
 
-					} // end of state fnc
+							$left.css({'display' : 'block'});
+							$right.css({'display' : 'block'});
+
+							if($chf <= 0){
+
+								$left.css({'opacity' : '0.25'}); // change to inactive
+								$right.css({'opacity' : '1'}); // change to active
+
+							}else if($chf >= ($chflen - 1)){
+
+								$left.css({'opacity' : '1'}); // change to active
+								$right.css({'opacity' : '0.25'}); // change to inactive
+
+							}else{
+
+								$left.css({'opacity' : '1'}); // change to active
+								$right.css({'opacity' : '1'}); // change to active
+
+							} // end of if statement
+
+						}, // end of entries fnc
+
+						finalists : function($chf, $chflen){
+
+							var $btns = $('.modal').find('.buttons'),
+								$left = $btns.find('.left'), // get left button
+								$right = $btns.find('.right');// get right button
+
+							$left.css({'display' : 'block'});
+							$right.css({'display' : 'block'});
+
+							if($chf <= 0){
+
+								$left.css({'opacity' : '0.25'}); // change to inactive
+								$right.css({'opacity' : '1'}); // change to active
+
+							}else if($chf >= ($chflen - 1)){
+
+								$left.css({'opacity' : '1'}); // change to active
+								$right.css({'opacity' : '0.25'}); // change to inactive
+
+							}else{
+
+								$left.css({'opacity' : '1'}); // change to active
+								$right.css({'opacity' : '1'}); // change to active
+
+							} // end of if statement
+
+						} // end of finalists fnc
+
+					} // end of state obj
 
 				}, // end of rndBtn obj
 
@@ -985,126 +1345,320 @@ $(document).ready(function(){
 
 				leftBtn : {
 
-					onclick : function($mod, $ani){
+					onclick : {
 
-						var	$reg = $m.s.modal.reg, // get the region reference from the modal object
-							$chf = $m.s.modal.chf, // get the chef reference from the modal object
-							$modDat = $mod.find('.data');
+						entries : function($mod, $ani){
 
-						if($chf <= 0){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+							var	$reg = $m.s.modal.reg, // get the region reference from the modal object
+								$chf = $m.s.modal.chf, // get the chef reference from the modal object
+								$modDat = $mod.find('.data');
 
-							return '';
+							if($chf <= 0){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
 
-						} // end of if statement
+								return '';
 
-						$chf--; // add one onto the chef reference to get new value
+							} // end of if statement
 
-						$m.s.modal.chf = $chf; // store that new value back into the modal object
+							$chf--; // add one onto the chef reference to get new value
 
-						TweenMax.to($modDat, $ani, {'left' : '-20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the left
+							$m.s.modal.chf = $chf; // store that new value back into the modal object
 
-						function clickComplete(){
+							TweenMax.to($modDat, $ani, {'left' : '-20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the left
 
-							$modDat.html($m.modal.populate($reg, $chf)); // populate the modal data
+							function clickComplete(){
 
-							TweenMax.set($modDat, {'left' : '20px'}); // set the new content off to the right
-							TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the right
+								$modDat
+									.css({'min-height' : '0'})
+									.html($m.modal.populate.entries($reg, $chf)); // populate the modal data
 
-						} // end of clickComplete fnc
+								TweenMax.set($modDat, {'left' : '20px'}); // set the new content off to the right
+								TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the right
 
-						$m.modal.actions.rndBtn.state($chf); // modify the states of the left and right buttons to active / inactive if need be
+							} // end of clickComplete fnc
 
-					} // end of onclick fnc
+							$m.modal.actions.rndBtn.state.entries($chf); // modify the states of the left and right buttons to active / inactive if need be
+						
+						}, // end of entries fnc
+
+						finalists : function($mod, $ani){
+
+							var	$chf = $m.s.modal.chf, // get the chef reference from the modal object
+								$modDat = $mod.find('.data');
+
+							if($chf <= 0){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+
+								return '';
+
+							} // end of if statement
+
+							$chf--; // add one onto the chef reference to get new value
+
+							$m.s.modal.chf = $chf; // store that new value back into the modal object
+
+							TweenMax.to($modDat, $ani, {'left' : '-20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the left
+
+							function clickComplete(){
+
+								$modDat
+									.css({'min-height' : '535px'})
+									.html($m.modal.populate.finalists($chf)); // populate the modal data
+
+								TweenMax.set($modDat, {'left' : '20px'}); // set the new content off to the right
+								TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the right
+
+							} // end of clickComplete fnc
+
+							$m.modal.actions.rndBtn.state.finalists($chf, 10); // modify the states of the left and right buttons to active / inactive if need be
+
+						} // end of finalists fnc
+
+					} // end of onclick obj
 
 				}, // end of left obj
 
 				rightBtn : {
 
-					onclick : function($mod, $ani){
+					onclick : {
 
-						var	$reg = $m.s.modal.reg, // get the region reference from the modal object
-							$chf = $m.s.modal.chf, // get the chef reference from the modal object
-							$chflen = $m.s.modal.chfLen, // get the chef length reference from the modal object
-							$modDat = $mod.find('.data');
+						entries : function($mod, $ani){
 
-						if($chf >= ($chflen - 1)){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+							var	$reg = $m.s.modal.reg, // get the region reference from the modal object
+								$chf = $m.s.modal.chf, // get the chef reference from the modal object
+								$chflen = $m.s.modal.chfLen, // get the chef length reference from the modal object
+								$modDat = $mod.find('.data');
 
-							return '';
+							if($chf >= ($chflen - 1)){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
 
-						} // end of if statement
+								return '';
 
-						$chf++; // add one onto the chef reference to get new value
+							} // end of if statement
 
-						$m.s.modal.chf = $chf; // store that new value back into the modal object
+							$chf++; // add one onto the chef reference to get new value
 
-						TweenMax.to($modDat, $ani, {'left' : '20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the right
+							$m.s.modal.chf = $chf; // store that new value back into the modal object
 
-						function clickComplete(){
+							TweenMax.to($modDat, $ani, {'left' : '20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the right
 
-							$modDat.html($m.modal.populate($reg, $chf)); // populate the modal data
+							function clickComplete(){
 
-							TweenMax.set($modDat, {'left' : '-20px'}); // set the new content off to the left
-							TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the left
+								$modDat
+									.css({'min-height' : '0'})
+									.html($m.modal.populate.entries($reg, $chf)); // populate the modal data
 
-						} // end of clickComplete fnc
+								TweenMax.set($modDat, {'left' : '-20px'}); // set the new content off to the left
+								TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the left
 
-						$m.modal.actions.rndBtn.state($chf, $chflen); // modify the states of the left and right buttons to active / inactive if need be
+							} // end of clickComplete fnc
 
-					} // end of onclick fnc
+							$m.modal.actions.rndBtn.state.entries($chf, $chflen); // modify the states of the left and right buttons to active / inactive if need be
+
+						}, // end of entries fnc
+
+						finalists : function($mod, $ani){
+
+							var	$chf = $m.s.modal.chf, // get the chef reference from the modal object
+								$chflen = 10, // get the chef length reference from the modal object
+								$modDat = $mod.find('.data');
+
+							if($chf >= ($chflen - 1)){ // if there is no more chef entries to pass in --> i.e. the end of the line then do no NOTHING!
+
+								return '';
+
+							} // end of if statement
+
+							$chf++; // add one onto the chef reference to get new value
+
+							$m.s.modal.chf = $chf; // store that new value back into the modal object
+
+							TweenMax.to($modDat, $ani, {'left' : '20px', 'opacity' : '0', onComplete : clickComplete}); // animate the content off to the right
+
+							function clickComplete(){
+
+								$modDat
+									.css({'min-height' : '535px'})
+									.html($m.modal.populate.finalists($chf)); // populate the modal data
+
+								TweenMax.set($modDat, {'left' : '-20px'}); // set the new content off to the left
+								TweenMax.to($modDat, $ani, {'left' : '0', 'opacity' : '1'}); // animate the content in from the left
+
+							} // end of clickComplete fnc
+
+							$m.modal.actions.rndBtn.state.finalists($chf, 10); // modify the states of the left and right buttons to active / inactive if need be
+
+						} // end of finalists fnc
+
+					} // end of onclick obj
 
 				}, // end of right obj	
 			
 			}, // end of actions obj
 
-			populate : function($reg, $chf){
+			position : function($loc){
 
-				var $dat = $m.s.dat[$reg].chefs[$chf],
-					$html;
+				//console.log('location = ' + $loc);
 
-				$html = '<div class="image" data-sprite="' + $dat[12] + '"></div>' +
-						//'<div class="image" style="background-position:' + $bgPos + 'px 0px"></div>' +
-						'<h2>' + $dat[8];
+				var $mod = $('.modal'),
+					$ani = $m.s.ani,
+					$off;
 
-				if($dat[9] !== ''){ // if there is A COURSE stipulated in the entry data...
+				if($loc === 'entries'){
 
-					$html += ' <span class="course">(' + $dat[9] + ')</span></h2>';
+					$off = $('.map-container').offset();
 
-				}else{ // if there is NO COURSE stipulated in the entry data...
+				}else if($loc === 'finalists'){
 
-					$html += '</h2>';
-
-				} // end of if statement
-						
-				$html += '<h3>Cut Used</h3>' +
-						'<div>' + $dat[10] + '</div>';
-
-				if($dat[11] !== ''){ // if there is NO DESCRIPTION stipulated in the entry data...
-
-					$html += '<h3>Dish Description</h3>' +
-							'<div>' + $dat[11] + '</div>';
+					$off = $('.finalists-container').offset();
 
 				} // end of if statement
 
-				$html += '<h3>Entrant Name</h3>' +
-						'<div>' + $dat[1] + ' ' + $dat[2] + ' ' + '<span class="title">(' + $dat[3] + ')</span>' + '</div>' +
-						'<h3>Restaurant</h3>' +
-						'<ul>' +
-							'<li class="break name">' + $dat[0] + '</li>' +
-							'<li class="bullet break extra-address">' +
-								'<ul>' +
-									'<li>' + $dat[4] + '</li>' +
-									'<li>' + $dat[5] + '</li>' +
-									'<li>' + $dat[6] + '</li>' +
-								'</ul>' +
-							'</li>' +
-							'<li class="bullet">Ph: ' + $dat[7] + '</li>' +
-						'</ul>';
+				$mod.css({
+					'display' : 'block',
+					//'top' : $off.top + 'px'
+				});
 
-				return $html;
+				TweenMax.to($mod, $ani, {'opacity' : '1', 'top' : $off.top + 'px'});
+
+
+			}, // end of position fnc
+
+			populate : {
+
+				entries : function($reg, $chf){
+
+					var $entDat = $m.s.entDat[$reg].chefs[$chf],
+						$html;
+
+					$html = '<div class="image logo" data-sprite="' + $entDat[12] + '"></div>' +
+							//'<div class="image" style="background-position:' + $bgPos + 'px 0px"></div>' +
+							'<h2>' + $entDat[8];
+
+					if($entDat[9] !== ''){ // if there is A COURSE stipulated in the entry data...
+
+						$html += ' <span class="course">(' + $entDat[9] + ')</span></h2>';
+
+					}else{ // if there is NO COURSE stipulated in the entry data...
+
+						$html += '</h2>';
+
+					} // end of if statement
+							
+					$html += '<h3>Cut Used</h3>' +
+							'<div>' + $entDat[10] + '</div>';
+
+					if($entDat[11] !== ''){ // if there is NO DESCRIPTION stipulated in the entry data...
+
+						$html += '<h3>Dish Description</h3>' +
+								'<div>' + $entDat[11] + '</div>';
+
+					} // end of if statement
+
+					$html += '<h3>Entrant Name</h3>' +
+							'<div>' + $entDat[1] + ' ' + $entDat[2] + ' ' + '<span class="title">(' + $entDat[3] + ')</span>' + '</div>' +
+							'<h3>Restaurant</h3>' +
+							'<ul>' +
+								'<li class="break name">' + $entDat[0] + '</li>' +
+								'<li class="bullet break extra-address">' +
+									'<ul>' +
+										'<li>' + $entDat[4] + '</li>' +
+										'<li>' + $entDat[5] + '</li>' +
+										'<li>' + $entDat[6] + '</li>' +
+									'</ul>' +
+								'</li>' +
+								'<li class="bullet">Ph: ' + $entDat[7] + '</li>' +
+							'</ul>';
+
+					return $html;
+
+				}, // end of enries fnc
+
+				finalists : function($chf){
+
+					var $finDat = $m.s.finDat,
+						$html;
+
+					$html = '<div class="image chef" style="background-position: ' + ($chf * -250) + 'px 0"></div>' +
+							'<div class="image logo finalist" data-sprite="' + $finDat[$chf].cut + '"></div>' +
+							//'<div class="image finalist"></div>' +
+							//'<div class="image dish" style="background-position: ' + ($chf * -250) + 'px -350px"></div>' +
+							'<h2 class="finalist-chef">' + $finDat[$chf].chefName + '</h2>' +
+							'<h3 class="finalist-restaruent">(' + $finDat[$chf].restaurant + ' - ' +
+								'<a class="website" href="stuff.co.nz">website.com</a>' +
+							')</h3>' +
+							'<span class="finalist-bio">' + $m.finalists.popData.paraLoop($finDat[$chf].bio) + '</span>' +
+							'<h2 class="finalist-dish">Dish</h2>' +
+							'<span class="finalist-details">' + $m.finalists.popData.paraLoop($finDat[$chf].details) + '</span>';
+
+					return $html;
+
+				} // end of finalists fnc
 
 			} // end of populate fnc
 		
 		}, // end of modal obj
+
+		feature : {
+
+			init : function(){
+
+				var $fi = $('.feature-image');
+
+				$m.feature.listeners($fi);
+
+			}, // end of init fnc
+
+			listeners : function($fi){
+
+				var $ani = $m.s.ani;
+
+				$fi.on('mouseenter', function(){
+
+					//console.log('feature image = enter');
+
+					$m.feature.actions.onmouseenter($fi, $ani);
+
+				}).on('mouseleave', function(){
+
+					//console.log('feature image = leave');
+
+					$m.feature.actions.onmouseleave($fi, $ani);
+
+				});
+
+			}, // end of listeners fnc
+
+			actions : {
+
+				onmouseenter : function($fi, $ani){
+
+					TweenMax.to($fi.find('.snippet0'), $ani, {'left' : '0'});
+					TweenMax.to($fi.find('.snippet1'), $ani, {'top' : '0'});
+					TweenMax.to($fi.find('.snippet2'), $ani, {'top' : '70px'});
+					TweenMax.to($fi.find('.snippet3'), $ani, {'top' : '0'});
+					TweenMax.to($fi.find('.snippet4'), $ani, {'top' : '100px'});
+					TweenMax.to($fi.find('.snippet5'), $ani, {'top' : '0'});
+					TweenMax.to($fi.find('.snippet6'), $ani, {'top' : '0'});
+					TweenMax.to($fi.find('.snippet7'), $ani, {'left' : '690px'});
+					TweenMax.to($fi.find('.snippet8'), $ani, {'top' : '150px'});
+
+				}, // end of onmouseenter
+
+				onmouseleave : function($fi, $ani){
+
+					TweenMax.to($fi.find('.snippet0'), $ani, {'left' : '-117px'});
+					TweenMax.to($fi.find('.snippet1'), $ani, {'top' : '-70px'});
+					TweenMax.to($fi.find('.snippet2'), $ani, {'top' : '200px'});
+					TweenMax.to($fi.find('.snippet3'), $ani, {'top' : '-100px'});
+					TweenMax.to($fi.find('.snippet4'), $ani, {'top' : '200px'});
+					TweenMax.to($fi.find('.snippet5'), $ani, {'top' : '-100px'});
+					TweenMax.to($fi.find('.snippet6'), $ani, {'top' : '200px'});
+					TweenMax.to($fi.find('.snippet7'), $ani, {'left' : '840px'});
+					TweenMax.to($fi.find('.snippet8'), $ani, {'top' : '200px'});
+
+				} // end of onmouseleave
+
+			} // end of actions obj
+
+		} // end of feature obj
 
 	}; // end of module obj
 
